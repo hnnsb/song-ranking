@@ -1,1 +1,11 @@
-<p>user works!</p>
+<div *ngIf="currentUser != undefined">
+  <div>
+    <span>{{currentUser?.display_name}}</span>
+    <img ngSrc="{{imageUrl}}" width="50" height="50" alt="profile picture">
+  </div>
+  <div *ngFor="let playlist of playlists.items">
+    <img ngSrc="{{playlist.images[0].url}}" width="50" height="50" alt="playlist cover picture">
+    <span>{{playlist.name}}</span>
+  </div>
+</div>
+

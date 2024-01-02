@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {PckeService} from "../../services/pcke/pcke.service";
 import {LoginService} from "../../services/login/login.service";
 
 @Component({
@@ -13,11 +12,11 @@ import {LoginService} from "../../services/login/login.service";
 export class HomeComponent {
 
   constructor(public router: Router,
-              public pckeService: PckeService,
               public loginService: LoginService) {
+    loginService.initialize().then()
   }
 
-  login(code: string) {
-    this.loginService.login(code);
+  login() {
+    this.loginService.login();
   }
 }

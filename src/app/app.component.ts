@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {PckeService} from "./services/pcke/pcke.service";
 import {LoginService} from "./services/login/login.service";
 
 @Component({
@@ -13,9 +12,10 @@ export class AppComponent {
   isInitialized = false;
 
   constructor(public router: Router,
-              public pckeService: PckeService,
               public loginService: LoginService) {
-    this.pckeService.initialize().then(() => this.isInitialized = true)
+    if (!this.isInitialized) {
+      this.loginService.initialize().then(() => this.isInitialized = true)
+    }
   }
 
 
