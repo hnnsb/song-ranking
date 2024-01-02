@@ -18,9 +18,5 @@ export class AppComponent {
     this.pckeService.initialize().then(() => this.isInitialized = true)
   }
 
-  login(code: string) {
-    this.loginService.login(code);
 
-
-  }
 }

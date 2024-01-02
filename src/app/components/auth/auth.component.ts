@@ -37,10 +37,10 @@ export class AuthComponent implements OnInit {
           localStorage.setItem("refresh_token", res.refresh_token!);
         }
       )
+      this.router.navigate(["/me"]).then()
     } else {
       // User aborted auth seqeuence
+      this.router.navigate(["/"]).then()
     }
-
-    this.router.navigate(["/"]).then()
   }
 }
