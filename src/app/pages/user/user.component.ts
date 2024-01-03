@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
-import {KeyValuePipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import {User} from "../../models/user";
+import {AsyncPipe, KeyValuePipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatButtonModule} from "@angular/material/button";
+import {HttpClientModule} from "@angular/common/http";
+import {PlaylistService} from "../../services/playlist/playlist.service";
+import {Playlist} from "../../models/playlist";
 
 @Component({
   selector: 'app-user',
@@ -10,28 +14,27 @@ import {User} from "../../models/user";
     NgForOf,
     KeyValuePipe,
     NgOptimizedImage,
-    NgIf
+    NgIf,
+    MatCheckboxModule,
+    MatButtonModule,
+    AsyncPipe
   ],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css',
+  providers: [UserService, HttpClientModule],
 })
-export class UserComponent implements OnInit{
-  currentUser: User | undefined;
-  imageUrl:string="";
-  playlists: any;
+export class UserComponent implements OnInit {
+  playlists: Playlist[] = [];
 
-  constructor(public userService: UserService) {
+  constructor(private playlistService: PlaylistService) {
 
   }
 
   ngOnInit() {
-    this.userService.getUser().subscribe(res=> {
-      this.currentUser = res
-      this.imageUrl = res.images[0].url
-    })
-    this.userService.getPlaylists().subscribe(res => {
-      this.playlists = res
-    })
+    this.playlistService.getPlaylists().subscribe(
+      res => this.playlists = res.items
+    );
+
   }
 
 }

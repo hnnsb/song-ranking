@@ -1,26 +1,37 @@
-import {NgModule} from "@angular/core";
+import {APP_INITIALIZER, NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {AppComponent} from "./app.component";
-import {CommonModule} from "@angular/common";
-import {provideRouter, RouterLink, RouterOutlet} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
+import {HeaderComponent} from "./layout/header/header.component";
 import {HttpClientModule} from "@angular/common/http";
-import {AuthComponent} from "./components/auth/auth.component";
-import {routes} from "./app.routes";
+import {FooterComponent} from "./layout/footer/footer.component";
+import {LoginService} from "./services/login/login.service";
+import {EMPTY} from "rxjs";
+
+export function initPckeAuth(loginService: LoginService) {
+  loginService.initialize().then()
+  return () => EMPTY;
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent
   ],
   imports: [
     BrowserModule,
-    CommonModule,
-    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
+    AppRoutingModule,
     HttpClientModule,
-    RouterLink,
-
   ],
-  providers: [provideRouter(routes)],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initPckeAuth,
+      deps: [LoginService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

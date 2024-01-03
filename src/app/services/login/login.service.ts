@@ -1,6 +1,10 @@
-import {Injectable} from '@angular/core';
+import {DestroyRef, inject, Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {base64encode, generateRandomString, sha256} from "../../pcke-code-challenge";
+import {SpotifyApiResponse} from "../../models/spotifyApiResponse";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {UserService} from "../user/user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +12,23 @@ import {base64encode, generateRandomString, sha256} from "../../pcke-code-challe
 export class LoginService {
   codeVerifier = generateRandomString(64);
   codeChallenge: string = "";
+  destroyRef = inject(DestroyRef);
 
-  constructor() {
+  constructor(private http: HttpClient, private userService: UserService,
+              private router: Router) {
   }
 
+  // PCKE Flow:
+  // 1. Generate code verifier
+  // 2. Hash and encode code verifier to get code challenge
   async initialize() {
     const hashed = await sha256(this.codeVerifier)
     this.codeChallenge = base64encode(hashed)
     window.localStorage.setItem("code_verifier", this.codeVerifier)
   }
 
-  login() {
+  // 3. Authorize code challenge with Spotify Api
+  authorize() {
     const authUrl = new URL(`${environment.spotifyAuthUrl}`)
     const scope = 'user-read-private user-read-email';
 
@@ -32,5 +42,35 @@ export class LoginService {
     }
     authUrl.search = new URLSearchParams(params).toString()
     window.location.href = authUrl.toString()
+  }
+
+  // 4. Request access token
+  request_token(code: string | null) {
+    if (code != null) {
+      const tokenUrl = new URL(`${environment.spotifyTokenUrl}`)
+      const params = {
+        grant_type: "authorization_code",
+        code,
+        redirect_uri: `${environment.redirectUri}`,
+        client_id: `${environment.spotifyClientId}`,
+        code_verifier: window.localStorage.getItem("code_verifier")!
+      }
+
+      this.http.post<SpotifyApiResponse>(tokenUrl.toString(), new URLSearchParams(params),
+        {headers: {"Content-Type": "application/x-www-form-urlencoded"}}
+      ).subscribe(
+        res => {
+          localStorage.setItem("access_token", res.access_token);
+          localStorage.setItem("refresh_token", res.refresh_token!);
+
+          this.userService.getUser().subscribe({
+            next: () => this.router.navigate(["/me"])
+          })
+        }
+      )
+    } else {
+      // User aborted access token sequence
+      this.router.navigate(["/"]).then()
+    }
   }
 }
