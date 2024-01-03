@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, tap} from "rxjs";
+import {BehaviorSubject, forkJoin, tap} from "rxjs";
+import {Track} from "../../models/track";
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,9 @@ import {BehaviorSubject, tap} from "rxjs";
 export class PlaylistService {
   private currentPlaylistsSubject = new BehaviorSubject<any | null>(null)
   public currentPlaylists = this.currentPlaylistsSubject.asObservable()
+
+  selectedPlaylistsLinks: string[] = [];
+
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +31,20 @@ export class PlaylistService {
     ).pipe(tap((res) => this.currentPlaylistsSubject.next(res)))
   }
 
+  getSongs() {
+    const observables = this.selectedPlaylistsLinks.map(
+      (link: string) => this.getSongsForPlaylist(link)
+    );
+    return forkJoin(observables)
+  }
+
+
+  getSongsForPlaylist(url: string) {
+    return this.http.get<{ items: { track: Track }[] }>(url, {headers: this.headerWithToken()})
+  }
+
   headerWithToken() {
     return {'Authorization': `Bearer ${localStorage.getItem("access_token")}`}
   }
+
 }

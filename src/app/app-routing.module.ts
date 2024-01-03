@@ -3,11 +3,13 @@ import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {AuthComponent} from "./components/auth/auth.component";
 import {UserComponent} from "./pages/user/user.component";
 import {HomeComponent} from "./pages/home/home.component";
+import {RankingComponent} from "./pages/ranking/ranking.component";
 
 
 const routes: Routes = [
   {path: 'auth', component: AuthComponent},
   {path: 'me', component: UserComponent},
+  {path: 'ranking', component: RankingComponent},
   {path: '**', component: HomeComponent}
 ]
 

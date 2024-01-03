@@ -1,14 +1,12 @@
 <div class="p-2">
   <h1>Your Playlists</h1>
-  <button mat-raised-button>Proceed with selected</button>
+  <button mat-raised-button (click)="choosePlaylists()" [disabled]="!someSelected">Choose selected</button>
 </div>
 
-<!--<div *ngIf="playlists">-->
-<div *ngFor="let playlist of playlists">
-  <mat-checkbox>
-    <img ngSrc="{{playlist.images[0].url}}" width="50" height="50" alt="playlist cover picture">
-    <span>{{playlist.name}}</span>
+<div *ngFor="let item of playlists">
+  <mat-checkbox class="py-1" (click)="lockButton()" [(ngModel)]="item.selected">
+    <img class="mx-1" ngSrc="{{item.playlist.images[0].url}}" width="50" height="50" alt="playlist cover picture">
+    <span class="mx-2">{{item.playlist.name}}</span>
   </mat-checkbox>
 </div>
-<!--</div>-->
 
