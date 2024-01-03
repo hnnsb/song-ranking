@@ -14,7 +14,7 @@ import {NgForOf, NgOptimizedImage} from "@angular/common";
   styleUrl: './ranking.component.css'
 })
 export class RankingComponent implements OnInit {
-  tracks: Track[] = [];
+  tracks: { track: Track, elo: number }[] = [];
 
   constructor(private playlistService: PlaylistService) {
   }
@@ -22,7 +22,9 @@ export class RankingComponent implements OnInit {
   ngOnInit() {
     this.playlistService.getSongs().subscribe(res => {
         res.forEach(playlist => {
-          this.tracks.push(...playlist.items.map((item) => item.track))
+          this.tracks.push(...playlist.items.map((item) => {
+            return {track: item.track, elo: 1200}
+          }))
         });
       }
     )
