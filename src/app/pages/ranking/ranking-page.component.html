@@ -1,6 +1,3 @@
 <div *ngFor="let trackEntry of tracks">
-  <a href="{{trackEntry.track.external_urls.spotify}}" target="_blank">
-    <img class="mx-1" ngSrc="{{trackEntry.track.album.images[0].url}}" width="50" height="50" alt="song cover picture">
-    <span>{{trackEntry.track.name}}</span>
-  </a>
+  <app-track-entry [track]="trackEntry.track" [size]=100></app-track-entry>
 </div>

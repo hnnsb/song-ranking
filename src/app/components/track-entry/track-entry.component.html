@@ -1,0 +1,21 @@
+<ng-container *ngIf="track != null">
+  <div class="row">
+    <div class="col-auto">
+      <a href="{{track.album.external_urls.spotify}}" target="_blank">
+        <img class="mx-1" ngSrc="{{track.album.images[0].url}}" width="{{size}}" height="{{size}}"
+             alt="song cover picture">
+      </a>
+    </div>
+    <div class="col-auto my-auto">
+
+      <a href="{{track.external_urls.spotify}}" target="_blank">
+        <b>{{track.name}}</b>
+      </a><br>
+      <ng-container *ngFor="let artist of track.artists;">
+        <a href="{{artist.external_urls.spotify}}" target="_blank">
+          <span>{{artist.name}}</span>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

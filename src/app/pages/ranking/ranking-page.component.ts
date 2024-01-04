@@ -2,13 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {PlaylistService} from "../../services/playlist/playlist.service";
 import {Track} from "../../models/track";
 import {NgForOf, NgOptimizedImage} from "@angular/common";
+import {TrackEntryComponent} from "../../components/track-entry/track-entry.component";
 
 @Component({
   selector: 'app-ranking-page',
   standalone: true,
   imports: [
     NgOptimizedImage,
-    NgForOf
+    NgForOf,
+    TrackEntryComponent
   ],
   templateUrl: './ranking-page.component.html',
   styleUrl: './ranking-page.component.css'
