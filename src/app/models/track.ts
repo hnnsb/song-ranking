@@ -9,18 +9,18 @@ export interface Track {
   duration_ms: number,
   explicit: boolean,
   external_ids: {
-    isrc: string,
-    ean: string,
-    upc: string
+    isrc?: string,
+    ean?: string,
+    upc?: string
   },
   external_urls: {
     spotify: string
   },
   href: string,
   id: string,
-  is_playable: boolean,
-  linked_from: {},
-  restrictions: {
+  is_playable?: boolean,
+  linked_from?: {},
+  restrictions?: {
     reason: string
   },
   name: string,
@@ -30,4 +30,6 @@ export interface Track {
   type: string,
   uri: string,
   is_local: boolean
+  episode?: boolean
+  track?: boolean
 }

@@ -1,6 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 environment.development.ts
+/storybook-static
+/.storybook
+
+#Not used currently, maybe needed later?
+pcke.service.spec.ts
+pcke.service.ts
+
 
 # Compiled output
 /dist

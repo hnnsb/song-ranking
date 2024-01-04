@@ -3,7 +3,4 @@
     <img class="mx-1" ngSrc="{{trackEntry.track.album.images[0].url}}" width="50" height="50" alt="song cover picture">
     <span>{{trackEntry.track.name}}</span>
   </a>
-  <audio controls [volume]="0.1" [controlsList]="'nodownload noplaybackrate'">
-    <source src="{{trackEntry.track.preview_url}}" type="audio/ogg">
-  </audio>
 </div>

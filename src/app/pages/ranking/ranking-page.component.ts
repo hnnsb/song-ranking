@@ -4,16 +4,16 @@ import {Track} from "../../models/track";
 import {NgForOf, NgOptimizedImage} from "@angular/common";
 
 @Component({
-  selector: 'app-ranking',
+  selector: 'app-ranking-page',
   standalone: true,
   imports: [
     NgOptimizedImage,
     NgForOf
   ],
-  templateUrl: './ranking.component.html',
-  styleUrl: './ranking.component.css'
+  templateUrl: './ranking-page.component.html',
+  styleUrl: './ranking-page.component.css'
 })
-export class RankingComponent implements OnInit {
+export class RankingPageComponent implements OnInit {
   tracks: { track: Track, elo: number }[] = [];
 
   constructor(private playlistService: PlaylistService) {

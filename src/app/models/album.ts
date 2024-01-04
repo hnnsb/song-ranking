@@ -14,7 +14,7 @@ export interface Album {
   name: string,
   release_date: string,
   release_date_precision: string,
-  restrictions: {
+  restrictions?: {
     reason: string
   },
   type: string,
