@@ -1,6 +1,6 @@
 import {TrackCardComponent} from "./track-card.component";
 import {argsToTemplate, Meta, StoryObj} from "@storybook/angular";
-import {Track} from "../../models/track";
+import {Track} from "../../models/Spotify/track";
 
 const meta: Meta<TrackCardComponent> = {
   title: "Track Card",

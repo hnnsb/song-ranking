@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Track} from "../../models/track";
+import {Track} from "../../models/Spotify/track";
 import {MatCardModule} from "@angular/material/card";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 

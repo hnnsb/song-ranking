@@ -11,11 +11,11 @@
       <a href="{{track.external_urls.spotify}}" target="_blank">
         <b>{{track.name}}</b>
       </a><br>
-      <ng-container *ngFor="let artist of track.artists;">
+      <span class="artist" *ngFor="let artist of track.artists;">
         <a href="{{artist.external_urls.spotify}}" target="_blank">
           <span>{{artist.name}}</span>
         </a>
-      </ng-container>
+      </span>
     </div>
   </div>
 </ng-container>

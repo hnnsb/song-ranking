@@ -1,7 +1,7 @@
 import {DestroyRef, inject, Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {base64encode, generateRandomString, sha256} from "../../pcke-code-challenge";
-import {SpotifyApiResponse} from "../../models/spotifyApiResponse";
+import {base64encode, generateRandomString, sha256} from "../../util/pcke-code-challenge";
+import {TokenResponse} from "../../models/Spotify/tokenResponse";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../user/user.service";
@@ -56,7 +56,7 @@ export class LoginService {
         code_verifier: window.localStorage.getItem("code_verifier")!
       }
 
-      this.http.post<SpotifyApiResponse>(tokenUrl.toString(), new URLSearchParams(params),
+      this.http.post<TokenResponse>(tokenUrl.toString(), new URLSearchParams(params),
         {headers: {"Content-Type": "application/x-www-form-urlencoded"}}
       ).subscribe(
         res => {

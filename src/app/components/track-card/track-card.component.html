@@ -8,10 +8,9 @@
              height="200"
              alt="song cover picture"
         ><br>
-
       </a>
     </div>
-    <a href="{{track.external_urls.spotify}}">
+    <a href="{{track.external_urls.spotify}}" target="_blank">
       <b>{{track.name}}</b><br>
     </a>
     <div class="m-auto" *ngFor="let artist of track.artists;">
@@ -20,9 +19,8 @@
       </a>
     </div>
 
-    <div class="m-auto py-2">
-      <audio controls [volume]="0.1" [controlsList]="'nodownload noplaybackrate'">
-        <source src="{{track!.preview_url}}" type="audio/ogg">
+    <div class="m-auto pt-2">
+      <audio controls src="{{track.preview_url}}" [volume]="0.1" [controlsList]="'nodownload noplaybackrate'">
       </audio>
     </div>
   </mat-card-content>

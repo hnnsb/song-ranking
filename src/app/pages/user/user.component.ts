@@ -5,7 +5,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
 import {PlaylistService} from "../../services/playlist/playlist.service";
-import {Playlist} from "../../models/playlist";
+import {Playlist} from "../../models/Spotify/playlist";
 import {FormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
 

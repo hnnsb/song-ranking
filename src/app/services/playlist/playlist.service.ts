@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, forkJoin, tap} from "rxjs";
-import {Track} from "../../models/track";
+import {Track} from "../../models/Spotify/track";
 
 
 @Injectable({

@@ -1,0 +1,24 @@
+<div class="row py-2">
+  <div class="col-2">
+    <span>Elo</span>
+  </div>
+  <div class="col-lg">
+    <span>Track</span>
+  </div>
+  <div class="col-auto">
+    <span>Matches</span>
+  </div>
+</div>
+<ng-container *ngFor="let entry of trackEntries">
+  <div class="row py-2">
+    <div class="col-2 my-auto">
+      <span>{{entry.elo | number: '1.0-0'}}</span>
+    </div>
+    <div class="col-lg">
+      <app-track-entry [track]="entry.track"></app-track-entry>
+    </div>
+    <div class="col-auto my-auto">
+      <span>{{entry.matches}}</span>
+    </div>
+  </div>
+</ng-container>

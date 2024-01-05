@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import {Track} from "../../models/track";
+import {Track} from "../../models/Spotify/track";
 
 @Component({
   selector: 'app-track-entry',

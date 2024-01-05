@@ -1,26 +1,21 @@
 import {argsToTemplate, Meta, StoryObj} from "@storybook/angular";
 import {Track} from "../../models/Spotify/track";
-import {TrackEntryComponent} from "./track-entry.component";
+import {RankingComponent} from "./ranking.component";
 
-const meta: Meta<TrackEntryComponent> = {
-  title: "Track Entry",
-  component: TrackEntryComponent,
+const meta: Meta<RankingComponent> = {
+  title: "Ranking",
+  component: RankingComponent,
   tags: ["autodocs"],
-  render: (args: TrackEntryComponent) => ({
+  render: (args: RankingComponent) => ({
     props: {
       ...args,
     },
-    template: `<app-track-entry ${argsToTemplate(args)}></app-track-entry>`,
+    template: `<app-ranking ${argsToTemplate(args)}></app-ranking>`,
   }),
-  argTypes: {
-    size: {
-      control: 'number',
-    },
-  },
 }
 
 export default meta;
-type Story = StoryObj<TrackEntryComponent>;
+type Story = StoryObj<RankingComponent>;
 
 const track: Track = {
   album: {
@@ -84,11 +79,17 @@ const track: Track = {
   track_number: 1,
   type: "track",
   uri: "spotify:track:1AoUXoSqOFHg22vfQJoVlm"
-};
+}
+
+const trackEntries: { elo: number, track: Track }[] = [
+  {elo: 1200, track: track},
+  {elo: 1400, track: track},
+  {elo: 1300, track: track},
+];
 
 export const Default: Story = {
   args: {
-    track: track
+    trackEntries
   }
 }
 

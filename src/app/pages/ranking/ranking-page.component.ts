@@ -1,8 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {PlaylistService} from "../../services/playlist/playlist.service";
-import {Track} from "../../models/track";
-import {NgForOf, NgOptimizedImage} from "@angular/common";
+import {Track} from "../../models/Spotify/track";
+import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {TrackEntryComponent} from "../../components/track-entry/track-entry.component";
+import {RankingComponent} from "../../components/ranking/ranking.component";
+import {TrackCardComponent} from "../../components/track-card/track-card.component";
+import {EloService} from "../../services/elo/elo.service";
+import {TrackEntry} from "../../models/track-entry";
+import {Observable, of} from "rxjs";
+import {MatchUp} from "../../models/match-up";
 
 @Component({
   selector: 'app-ranking-page',
@@ -10,26 +16,38 @@ import {TrackEntryComponent} from "../../components/track-entry/track-entry.comp
   imports: [
     NgOptimizedImage,
     NgForOf,
-    TrackEntryComponent
+    TrackEntryComponent,
+    RankingComponent,
+    TrackCardComponent,
+    AsyncPipe,
+    NgIf
   ],
   templateUrl: './ranking-page.component.html',
   styleUrl: './ranking-page.component.css'
 })
 export class RankingPageComponent implements OnInit {
-  tracks: { track: Track, elo: number }[] = [];
+  trackEntries$: Observable<TrackEntry[]> = of([]);
+  matchUp: MatchUp | null = null;
 
-  constructor(private playlistService: PlaylistService) {
+  constructor(private playlistService: PlaylistService, private eloService: EloService) {
   }
 
   ngOnInit() {
+    let tracks: Track[] = []
     this.playlistService.getSongs().subscribe(res => {
-        res.forEach(playlist => {
-          this.tracks.push(...playlist.items.map((item) => {
-            return {track: item.track, elo: 1200}
-          }))
-        });
-      }
+      res.forEach(playlist => {
+        tracks.push(...playlist.items.map((item) => item.track))
+      })
+      this.eloService.setTracks(tracks)
+    });
+
+    this.trackEntries$ = this.eloService.getTrackEntries()
+    this.eloService.getMatchUp().subscribe(matchUp =>
+      this.matchUp = matchUp
     )
   }
 
+  chooseWinner(winner: number) {
+    this.eloService.updateRanking(winner)
+  }
 }
