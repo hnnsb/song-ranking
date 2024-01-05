@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {DecimalPipe, NgForOf} from "@angular/common";
 import {TrackEntryComponent} from "../track-entry/track-entry.component";
 import {TrackEntry} from "../../models/track-entry";
+import {MatDividerModule} from "@angular/material/divider";
 
 @Component({
   selector: 'app-ranking',
@@ -9,7 +10,8 @@ import {TrackEntry} from "../../models/track-entry";
   imports: [
     NgForOf,
     TrackEntryComponent,
-    DecimalPipe
+    DecimalPipe,
+    MatDividerModule
   ],
   templateUrl: './ranking.component.html',
   styleUrl: './ranking.component.css'

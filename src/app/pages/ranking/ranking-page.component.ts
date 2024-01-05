@@ -9,6 +9,7 @@ import {EloService} from "../../services/elo/elo.service";
 import {TrackEntry} from "../../models/track-entry";
 import {Observable, of} from "rxjs";
 import {MatchUp} from "../../models/match-up";
+import {MatCardModule} from "@angular/material/card";
 
 @Component({
   selector: 'app-ranking-page',
@@ -20,7 +21,8 @@ import {MatchUp} from "../../models/match-up";
     RankingComponent,
     TrackCardComponent,
     AsyncPipe,
-    NgIf
+    NgIf,
+    MatCardModule
   ],
   templateUrl: './ranking-page.component.html',
   styleUrl: './ranking-page.component.css'
