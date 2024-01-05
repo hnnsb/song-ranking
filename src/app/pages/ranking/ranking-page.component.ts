@@ -36,7 +36,7 @@ export class RankingPageComponent implements OnInit {
     let tracks: Track[] = []
     this.playlistService.getSongs().subscribe(res => {
       res.forEach(playlist => {
-        tracks.push(...playlist.items.map((item) => item.track))
+        tracks.push(...playlist.map((item) => item.track))
       })
       this.eloService.setTracks(tracks)
     });

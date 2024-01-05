@@ -1,17 +1,21 @@
-<div class="row">
-  <div class="col-auto d-flex">
+<div class="row d-flex">
+  <div class="col-lg">
     <ng-container *ngIf="matchUp != null">
       <div class="col-auto d-flex justify-content-center">
         <app-track-card class="pb-2" [track]="matchUp.a.track"></app-track-card>
-        <button class="btn btn-primary" (click)="chooseWinner(1)">Choose this</button>
+        <div>
+          <button class="btn btn-primary" (click)="chooseWinner(1)">Choose this</button>
+        </div>
       </div>
       <div class="col-auto d-flex justify-content-center">
         <app-track-card class="pb-2" [track]="matchUp.b.track"></app-track-card>
-        <button class="btn btn-primary" (click)="chooseWinner(2)">Choose this</button>
+        <div>
+          <button class="btn btn-primary" (click)="chooseWinner(2)">Choose this</button>
+        </div>
       </div>
     </ng-container>
   </div>
-  <div class="col-auto">
+  <div class="col-auto justify-content-center mx-auto align-content-center">
     <app-ranking [trackEntries]="trackEntries$ | async"></app-ranking>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, forkJoin, tap} from "rxjs";
+import {BehaviorSubject, forkJoin, map, tap} from "rxjs";
 import {Track} from "../../models/Spotify/track";
 
 
@@ -25,6 +25,7 @@ export class PlaylistService {
       offset: "0"
     }
     playlistUrl.search = new URLSearchParams(params).toString()
+
     return this.http.get<any>(
       playlistUrl.toString(),
       {headers: this.headerWithToken()}
@@ -33,7 +34,7 @@ export class PlaylistService {
 
   getSongs() {
     const observables = this.selectedPlaylistsLinks.map(
-      (link: string) => this.getSongsForPlaylist(link)
+      (link: string) => this.getSongsForPlaylist(link).pipe(map(res => res.items))
     );
     return forkJoin(observables)
   }
