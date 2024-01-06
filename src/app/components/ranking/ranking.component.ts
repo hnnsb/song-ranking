@@ -18,4 +18,5 @@ import {MatDividerModule} from "@angular/material/divider";
 })
 export class RankingComponent {
   @Input({required: true}) trackEntries: TrackEntry[] | null = [];
+  @Input() maxHeight = 600;
 }

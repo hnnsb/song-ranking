@@ -25,6 +25,10 @@ const trackEntries: TrackEntry[] = [
   {elo: 1300, track: TRACK, matches: 0},
 ];
 
+for (let i = 0; i < 20; i++) {
+  trackEntries.push({elo: 1200, track: TRACK, matches: 0})
+}
+
 export const Default: Story = {
   args: {
     trackEntries

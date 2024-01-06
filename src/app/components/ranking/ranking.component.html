@@ -1,8 +1,8 @@
-<div class="row py-2">
+<div class="row py-2" style="padding-right: 20px">
   <div class="col-auto">
     <span>Elo</span>
   </div>
-  <div class="col-lg">
+  <div class="col-sm">
     <span>Track</span>
   </div>
   <div class="col-auto">
@@ -10,16 +10,18 @@
   </div>
 </div>
 <mat-divider></mat-divider>
-<ng-container *ngFor="let entry of trackEntries">
-  <div class="row py-2">
-    <div class="col-auto my-auto">
-      <span>{{entry.elo | number: '1.0-0'}}</span>
+<div class="" style="padding-right:20px;overflow: auto;height:680px">
+  <ng-container *ngFor="let entry of trackEntries">
+    <div class="row py-2">
+      <div class="col-auto my-auto">
+        <span>{{entry.elo | number: '1.0-0'}}</span>
+      </div>
+      <div class="col-sm">
+        <app-track-entry [track]="entry.track"></app-track-entry>
+      </div>
+      <div class="col-auto my-auto text-end">
+        <span>{{entry.matches}}</span>
+      </div>
     </div>
-    <div class="col-lg">
-      <app-track-entry [track]="entry.track"></app-track-entry>
-    </div>
-    <div class="col-auto my-auto text-end">
-      <span>{{entry.matches}}</span>
-    </div>
-  </div>
-</ng-container>
+  </ng-container>
+</div>

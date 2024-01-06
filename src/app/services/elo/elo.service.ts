@@ -26,38 +26,54 @@ export class EloService {
   }
 
   generateMatchUp() {
-    const shuffledArray = this.trackEntries.slice().sort(() => Math.random() - 0.5);
+    if (this.trackEntries.length < 2) {
+      return
+    }
+    const totalWeight = this.trackEntries.reduce((sum, entry) => sum + 1 / (entry.matches + 1), 0);
 
-    this.matchUp = {a: shuffledArray[0], b: shuffledArray[1]}
+    const chosenEntries = new Set<TrackEntry>();
+    while (chosenEntries.size < 2) {
+      const randomValue = Math.random() * totalWeight
+      let cumulativeWeight = 0;
+
+      for (const entry of this.trackEntries) {
+        cumulativeWeight += 1 / (entry.matches + 1);
+        if (randomValue <= cumulativeWeight) {
+          chosenEntries.add(entry);
+          entry.matches++;
+          break;
+        }
+      }
+    }
+    let chosenList = [...chosenEntries.values()]
+    this.matchUp = {a: chosenList[0], b: chosenList[1]}
     this.matchUpSubject.next(this.matchUp)
   }
 
   updateRanking(winner: number) {
     if (this.matchUp == null) {
-      return
+      return;
     }
-    let rA = this.matchUp.a.elo
-    let rB = this.matchUp.b.elo
+    let rA = this.matchUp.a.elo;
+    let rB = this.matchUp.b.elo;
 
-    let eA = calcExpectation(rA, rB)
-    let eB = calcExpectation(rB, rA)
+    let eA = calcExpectation(rA, rB);
+    let eB = calcExpectation(rB, rA);
 
-    let scoreA = winner == 1 ? 1 : 0
-    let scoreB = winner == 2 ? 1 : 0
+    let scoreA = winner == 1 ? 1 : 0;
+    let scoreB = winner == 2 ? 1 : 0;
 
-    let matchesA = this.matchUp.a.matches
-    let matchesB = this.matchUp.a.matches
+    let matchesA = this.matchUp.a.matches;
+    let matchesB = this.matchUp.a.matches;
 
     let new_rA = calcNewRating(rA, eA, scoreA, matchesA);
     let new_rB = calcNewRating(rB, eB, scoreB, matchesB);
 
-    this.matchUp.a.matches += 1
-    this.matchUp.b.matches += 1
-    this.matchUp.a.elo = new_rA
-    this.matchUp.b.elo = new_rB
+    this.matchUp.a.elo = new_rA;
+    this.matchUp.b.elo = new_rB;
 
-    this.updateTrackEntriesSubject()
-    this.generateMatchUp()
+    this.updateTrackEntriesSubject();
+    this.generateMatchUp();
   }
 
   updateTrackEntriesSubject() {
@@ -70,8 +86,8 @@ export class EloService {
     this.trackEntries = tracks.map(track => {
       return new TrackEntry(track);
     })
-    this.updateTrackEntriesSubject()
-    this.generateMatchUp()
+    this.updateTrackEntriesSubject();
+    this.generateMatchUp();
   }
 
 }
