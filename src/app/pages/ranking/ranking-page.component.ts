@@ -10,6 +10,7 @@ import {TrackEntry} from "../../models/track-entry";
 import {Observable, of} from "rxjs";
 import {MatchUp} from "../../models/match-up";
 import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-ranking-page',
@@ -22,7 +23,8 @@ import {MatCardModule} from "@angular/material/card";
     TrackCardComponent,
     AsyncPipe,
     NgIf,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   templateUrl: './ranking-page.component.html',
   styleUrl: './ranking-page.component.css'

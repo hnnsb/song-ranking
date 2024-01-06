@@ -31,7 +31,8 @@ for (let i = 0; i < 20; i++) {
 
 export const Default: Story = {
   args: {
-    trackEntries
+    trackEntries,
+    maxHeight: 300
   }
 }
 
