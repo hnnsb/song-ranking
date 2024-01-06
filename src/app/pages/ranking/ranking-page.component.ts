@@ -10,7 +10,8 @@ import {TrackEntry} from "../../models/track-entry";
 import {Observable, of} from "rxjs";
 import {MatchUp} from "../../models/match-up";
 import {MatCardModule} from "@angular/material/card";
-import {MatIconModule} from "@angular/material/icon";
+import {SavePlaylistModalComponent} from "../../components/save-playlist-modal/save-playlist-modal.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-ranking-page',
@@ -24,7 +25,6 @@ import {MatIconModule} from "@angular/material/icon";
     AsyncPipe,
     NgIf,
     MatCardModule,
-    MatIconModule
   ],
   templateUrl: './ranking-page.component.html',
   styleUrl: './ranking-page.component.css'
@@ -33,7 +33,7 @@ export class RankingPageComponent implements OnInit {
   trackEntries$: Observable<TrackEntry[]> = of([]);
   matchUp: MatchUp | null = null;
 
-  constructor(private playlistService: PlaylistService, private eloService: EloService) {
+  constructor(private playlistService: PlaylistService, private eloService: EloService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -53,5 +53,9 @@ export class RankingPageComponent implements OnInit {
 
   chooseWinner(winner: number) {
     this.eloService.updateRanking(winner)
+  }
+
+  savePlaylist() {
+    const modalRef = this.modalService.open(SavePlaylistModalComponent)
   }
 }

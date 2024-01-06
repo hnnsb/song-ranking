@@ -9,6 +9,7 @@ import {LoginService} from "./services/login/login.service";
 import {EMPTY} from "rxjs";
 import {AngularRenderer} from "@storybook/angular";
 import {DecoratorFunction} from "@storybook/types";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function initPckeAuth(loginService: LoginService) {
   loginService.initialize().then()
@@ -47,6 +48,7 @@ export function injectInjectorToProps<TArgs = unknown>(): DecoratorFunction<Angu
     FooterComponent,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [
     {
