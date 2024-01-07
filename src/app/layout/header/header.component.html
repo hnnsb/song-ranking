@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand bg-body-secondary p-2">
+<nav class="navbar navbar-expand bg-body-secondary">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">Rank your Songs!</a>
     <ul class="navbar-nav me-auto my-2 mb-lg-0">
@@ -10,7 +10,7 @@
     <div *ngIf="currentUser$ | async as currentUser">
       <div>
         <span>{{currentUser.display_name}}</span>
-        <img class="m-2 profile-img" width="60" height="60"
+        <img class="m-2 profile-img" width="50" height="50"
              ngSrc="{{currentUser.images[0].url}}"
              alt="profile picture">
       </div>

@@ -10,7 +10,7 @@ import {FormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-playlists-page',
   standalone: true,
   imports: [
     NgForOf,
@@ -21,11 +21,11 @@ import {Router} from "@angular/router";
     MatButtonModule,
     FormsModule
   ],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.css',
+  templateUrl: './playlists-page.component.html',
+  styleUrl: './playlists-page.component.css',
   providers: [UserService, HttpClientModule],
 })
-export class UserComponent implements OnInit {
+export class PlaylistsPage implements OnInit {
   playlists: { playlist: Playlist, selected: boolean }[] = [];
   someSelected = false
 
