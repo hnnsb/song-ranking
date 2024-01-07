@@ -1,19 +1,25 @@
 <nav class="navbar navbar-expand bg-body-secondary">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">Rank your Songs!</a>
-    <ul class="navbar-nav me-auto my-2 mb-lg-0">
+    <ul class="navbar-nav me-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/">Home</a>
       </li>
     </ul>
 
-    <div *ngIf="currentUser$ | async as currentUser">
-      <div>
+    <ng-container *ngIf="!(userService.isLoggedIn | async); else elseBlock;">
+      <a class="btn btn-primary" role="button" (click)="login()">Log in</a>
+    </ng-container>
+
+    <ng-template #elseBlock>
+      <div *ngIf="currentUser$ | async as currentUser">
         <span>{{currentUser.display_name}}</span>
         <img class="m-2 profile-img" width="50" height="50"
              ngSrc="{{currentUser.images[0].url}}"
              alt="profile picture">
       </div>
-    </div>
+      <a class="btn btn-outline-secondary" role="button" (click)="logout()">Log out</a>
+    </ng-template>
   </div>
 </nav>
+
