@@ -12,6 +12,7 @@ import {MatchUp} from "../../models/match-up";
 import {MatCardModule} from "@angular/material/card";
 import {SavePlaylistModalComponent} from "../../components/save-playlist-modal/save-playlist-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'app-ranking-page',
@@ -33,7 +34,10 @@ export class RankingPageComponent implements OnInit {
   trackEntries$: Observable<TrackEntry[]> = of([]);
   matchUp: MatchUp | null = null;
 
-  constructor(private playlistService: PlaylistService, private eloService: EloService, private modalService: NgbModal) {
+  constructor(private playlistService: PlaylistService,
+              private eloService: EloService,
+              private modalService: NgbModal,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -57,5 +61,20 @@ export class RankingPageComponent implements OnInit {
 
   savePlaylist() {
     const modalRef = this.modalService.open(SavePlaylistModalComponent)
+
+    modalRef.result.then(form => {
+        this.eloService.getTrackEntries().subscribe(res => {
+          this.userService.currentUser.subscribe(user =>
+            this.playlistService.savePlaylist(
+              form.name,
+              user!.id,
+              res.map(trackEntry => trackEntry.track.uri).slice(0, form.amount)
+            )
+          )
+        })
+      },
+      () => {
+      }
+    )
   }
 }

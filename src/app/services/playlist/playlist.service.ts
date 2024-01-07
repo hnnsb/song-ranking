@@ -3,6 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, forkJoin, map, tap} from "rxjs";
 import {Track} from "../../models/Spotify/track";
+import {Playlist} from "../../models/Spotify/playlist";
 
 
 @Injectable({
@@ -44,8 +45,26 @@ export class PlaylistService {
     return this.http.get<{ items: { track: Track }[] }>(url, {headers: this.headerWithToken()})
   }
 
+  savePlaylist(name: string, userId: string, trackUris: string[]) {
+    let body = {
+      name: name,
+      description: `The top ${trackUris.length} of your selected songs`
+    }
+    this.http.post<Playlist>(
+      `${environment.spotifyApiUrl}/users/${userId}/playlists`,
+      body,
+      {headers: this.headerWithToken()}
+    ).subscribe(playlist => {
+      console.log("Playlist created", playlist)
+      this.http.post(
+        playlist.tracks.href,
+        {"uris": trackUris, "position": 0},
+        {headers: this.headerWithToken()}
+      ).subscribe(res => console.log("added tracks", res))
+    })
+  }
+
   headerWithToken() {
     return {'Authorization': `Bearer ${localStorage.getItem("access_token")}`}
   }
-
 }

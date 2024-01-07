@@ -3,7 +3,7 @@ import {argsToTemplate, Meta, StoryObj} from "@storybook/angular";
 import {TRACK} from "../../../stories/data/track";
 
 const meta: Meta<TrackCardComponent> = {
-  title: "Track Card",
+  title: "Components/Track Card",
   component: TrackCardComponent,
   tags: ["autodocs"],
   render: (args: TrackCardComponent) => ({

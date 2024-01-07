@@ -1,16 +1,32 @@
 <div class="modal-content">
   <div class="modal-header">
-    <h5 class="modal-title">Save Playlist</h5>
+    <h4 class="modal-title">Save Playlist</h4>
     <button type="button" class="btn-close" (click)="activeModal.dismiss('Cross click')"
             aria-label="Close"></button>
   </div>
   <div class="modal-body">
-    <p>Save Playlist body</p>
-    <!--    TODO Select amount, enter name, -->
+    <p>Give your playlist a name and select how many songs you want to save.</p>
+    <form class="w-50" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <input class="mt-2 form-control" name="name" placeholder="Playlist name" ngModel required><br>
+      <select class="mb-2 form-control" name="amount" [value]="10" ngModel required>
+        <option>10</option>
+        <option>25</option>
+        <option>50</option>
+        <option>100</option>
+      </select>
+    </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss()" aria-label="Close">Close
-    </button>
-    <button type="button" class="btn btn-primary" (click)="activeModal.close()">Save Playlist</button>
+    <div *ngIf="!f.valid" class="alert alert-warning" role="alert">
+      You have to provide a name and an amount to save the playlist.
+    </div>
+    <div>
+      <button type="button" class="btn btn-outline-secondary mx-2" (click)="activeModal.dismiss()" aria-label="Close">
+        Close
+      </button>
+      <button type="button" class="btn btn-primary" [disabled]="!f.valid" (click)="onSubmit(f)">
+        Save Playlist
+      </button>
+    </div>
   </div>
 </div>

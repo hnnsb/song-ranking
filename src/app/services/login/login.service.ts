@@ -30,7 +30,7 @@ export class LoginService {
   // 3. Authorize code challenge with Spotify Api
   authorize() {
     const authUrl = new URL(`${environment.spotifyAuthUrl}`)
-    const scope = 'user-read-private user-read-email';
+    const scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private';
 
     const params = {
       response_type: "code",
@@ -64,7 +64,7 @@ export class LoginService {
           localStorage.setItem("refresh_token", res.refresh_token!);
 
           this.userService.getUser().subscribe({
-            next: () => this.router.navigate(["/me"])
+            next: () => this.router.navigate(["/"])
           })
         }
       )

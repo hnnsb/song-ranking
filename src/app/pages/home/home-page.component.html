@@ -1,4 +1,9 @@
-<div class="container d-block">
-  <h1>Welcome</h1>
-  <a type="button" class="btn btn-primary" (click)="login()">Login</a>
-</div>
+<ng-container *ngIf="!(this.userService.isLoggedIn | async); else elseBlock">
+  <div class="container d-block">
+    <h1>Login to Spotify</h1>
+    <a type="button" class="btn btn-primary" (click)="login()">Login</a>
+  </div>
+</ng-container>
+<ng-template #elseBlock>
+  <a type="button" class="btn btn-primary" routerLink="ranking/playlists">Rank your songs</a>
+</ng-template>

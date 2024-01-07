@@ -3,7 +3,7 @@ import {TrackEntryComponent} from "./track-entry.component";
 import {TRACK} from "../../../stories/data/track";
 
 const meta: Meta<TrackEntryComponent> = {
-  title: "Track Entry",
+  title: "Components/Track Entry",
   component: TrackEntryComponent,
   tags: ["autodocs"],
   render: (args: TrackEntryComponent) => ({

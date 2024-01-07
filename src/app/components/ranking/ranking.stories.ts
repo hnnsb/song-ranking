@@ -4,7 +4,7 @@ import {TrackEntry} from "../../models/track-entry";
 import {TRACK} from "../../../stories/data/track";
 
 const meta: Meta<RankingComponent> = {
-  title: "Ranking",
+  title: "Components/Ranking",
   component: RankingComponent,
   tags: ["autodocs"],
   render: (args: RankingComponent) => ({

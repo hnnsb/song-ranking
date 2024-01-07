@@ -8,8 +8,12 @@ import {RankingPageComponent} from "./pages/ranking/ranking-page.component";
 
 const routes: Routes = [
   {path: 'auth', component: AuthComponent},
-  {path: 'me', component: UserComponent},
-  {path: 'ranking', component: RankingPageComponent},
+  {
+    path: 'ranking', children: [
+      {path: 'playlists', component: UserComponent},
+      {path: 'songs', component: RankingPageComponent}
+    ]
+  },
   {path: '**', component: HomePageComponent}
 ]
 

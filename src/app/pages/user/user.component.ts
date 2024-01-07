@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
       .filter(item => item.selected)
       .map(item => item.playlist.tracks.href)
 
-    this.router.navigate(["ranking"])
+    this.router.navigate(["ranking/songs"]).then()
   }
 
   lockButton() {
