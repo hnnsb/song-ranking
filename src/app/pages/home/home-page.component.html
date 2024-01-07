@@ -1,9 +1,28 @@
 <ng-container *ngIf="!(this.userService.isLoggedIn | async); else elseBlock">
-  <div class="container d-block">
-    <h1>Login to Spotify</h1>
-    <a type="button" class="btn btn-primary" (click)="login()">Login</a>
+  <div class="my-5 h-50">
+    <div class="text-center">
+      <h1>Login with Spotify</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+      <a (click)="login()"
+         class="btn btn-primary"
+         type="button">
+        Login
+      </a>
+    </div>
   </div>
 </ng-container>
+
 <ng-template #elseBlock>
-  <a type="button" class="btn btn-primary" routerLink="ranking/playlists">Rank your songs</a>
+  <div class="row">
+    <div class="col">
+      <a type="button" class="btn btn-primary" routerLink="">Rank your songs</a>
+    </div>
+    <div class="col">
+      <a type="button" class="btn btn-primary" routerLink="">Rank your songs</a>
+    </div>
+    <div class="col">
+      <a type="button" class="btn btn-primary" routerLink="">Rank your songs</a>
+    </div>
+  </div>
 </ng-template>
