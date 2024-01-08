@@ -8,3 +8,12 @@ mat-card {
 .mat-mdc-card-content:last-child {
   padding-bottom: 12px;
 }
+
+.zoom {
+  transition: transform .2s;
+  cursor: pointer;
+}
+
+.zoom:hover {
+  transform: scale(1.05);
+}
