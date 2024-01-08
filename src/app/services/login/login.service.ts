@@ -57,14 +57,20 @@ export class LoginService {
 
       this.http.post<TokenResponse>(tokenUrl.toString(), new URLSearchParams(params),
         {headers: {"Content-Type": "application/x-www-form-urlencoded"}}
-      ).subscribe(
-        res => {
-          localStorage.setItem("access_token", res.access_token);
-          localStorage.setItem("refresh_token", res.refresh_token!);
+      ).subscribe({
+          next: res => {
+            localStorage.setItem("access_token", res.access_token);
+            localStorage.setItem("refresh_token", res.refresh_token!);
 
-          this.userService.getUser().subscribe({
-            next: () => this.router.navigate(["/"])
-          })
+            this.userService.getUser().subscribe({
+              next: () => this.router.navigate(["/"]),
+
+            })
+          },
+          error: () => {
+            this.logout()
+            this.authorize().then()
+          }
         }
       )
     } else {
