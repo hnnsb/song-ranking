@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, forkJoin, map, tap} from "rxjs";
+import {forkJoin, map, Observable} from "rxjs";
 import {Track} from "../../models/Spotify/track";
 import {Playlist} from "../../models/Spotify/playlist";
 
@@ -10,11 +10,7 @@ import {Playlist} from "../../models/Spotify/playlist";
   providedIn: 'root'
 })
 export class PlaylistService {
-  private currentPlaylistsSubject = new BehaviorSubject<any | null>(null)
-  public currentPlaylists = this.currentPlaylistsSubject.asObservable()
-
   selectedPlaylistsLinks: string[] = [];
-
 
   constructor(private http: HttpClient) {
   }
@@ -27,21 +23,25 @@ export class PlaylistService {
     }
     playlistUrl.search = new URLSearchParams(params).toString()
 
-    return this.http.get<any>(
-      playlistUrl.toString(),
-    ).pipe(tap((res) => this.currentPlaylistsSubject.next(res)))
+    return this.http.get<{ items: Playlist[] }>(playlistUrl.toString())
+      .pipe(map(res => res.items))
   }
 
-  getSongs() {
-    const observables = this.selectedPlaylistsLinks.map(
-      (link: string) => this.getSongsForPlaylist(link).pipe(map(res => res.items))
+  getSongs(): Observable<Track[]> {
+    const playlistSongs = this.selectedPlaylistsLinks.map(
+      (link: string) => this.getSongsOfPlaylist(link)
     );
-    return forkJoin(observables)
+    return forkJoin(playlistSongs).pipe(map(res => res.flat()))
   }
 
 
-  getSongsForPlaylist(url: string) {
+  getSongsOfPlaylist(url: string): Observable<Track[]> {
     return this.http.get<{ items: { track: Track }[] }>(url)
+      .pipe(
+        map(trackList =>
+          trackList.items.map(item => item.track)
+        )
+      )
   }
 
   savePlaylist(name: string, userId: string, trackUris: string[]) {

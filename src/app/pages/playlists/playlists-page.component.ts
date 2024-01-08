@@ -35,9 +35,11 @@ export class PlaylistsPage implements OnInit {
 
   ngOnInit() {
     this.playlistService.getPlaylists().subscribe(
-      res => res.items.forEach(
-        (item: any) => this.playlists.push({playlist: item, selected: false})
-      )
+      res => {
+        this.playlists = res.map(playlist => {
+          return {playlist, selected: false}
+        })
+      }
     );
   }
 

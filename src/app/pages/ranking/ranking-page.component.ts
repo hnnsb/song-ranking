@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PlaylistService} from "../../services/playlist/playlist.service";
-import {Track} from "../../models/Spotify/track";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {TrackEntryComponent} from "../../components/track-entry/track-entry.component";
 import {RankingComponent} from "../../components/ranking/ranking.component";
@@ -41,12 +40,8 @@ export class RankingPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    let tracks: Track[] = []
-    this.playlistService.getSongs().subscribe(res => {
-      res.forEach(playlist => {
-        tracks.push(...playlist.map((item) => item.track))
-      })
-      this.eloService.setTracks(tracks)
+    this.playlistService.getSongs().subscribe(songs => {
+      this.eloService.setTracks(songs)
     });
 
     this.trackEntries$ = this.eloService.getTrackEntries()
