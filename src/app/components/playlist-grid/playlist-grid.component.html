@@ -1,0 +1,7 @@
+<div id="playlists" [style]="getColumnStyles()">
+  <ng-container *ngFor="let item of playlists">
+    <app-playlist-entry (selectEvent)="select($event, item)"
+                        [playlist]="item.playlist">
+    </app-playlist-entry>
+  </ng-container>
+</div>

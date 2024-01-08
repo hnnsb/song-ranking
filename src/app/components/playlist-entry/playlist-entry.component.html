@@ -1,0 +1,20 @@
+<a (click)="selected =!selected; changeStatus()">
+
+  <mat-card [class]="selected?'selected':''">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-auto">
+          <img class="" ngSrc="{{playlist!.images[0].url}}" width="50" height="50" alt="playlist cover picture">
+        </div>
+        <div class="col-auto d-flex flex-column my-auto">
+          <div class="row">
+            <span><b>{{playlist!.name}}</b></span>
+          </div>
+          <div class="row">
+            <span>{{playlist!.tracks.total}} Tracks</span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</a>

@@ -8,6 +8,8 @@ import {PlaylistService} from "../../services/playlist/playlist.service";
 import {Playlist} from "../../models/Spotify/playlist";
 import {FormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
+import {PlaylistEntryComponent} from "../../components/playlist-entry/playlist-entry.component";
+import {PlaylistGridComponent} from "../../components/playlist-grid/playlist-grid.component";
 
 @Component({
   selector: 'app-playlists-page',
@@ -19,7 +21,9 @@ import {Router} from "@angular/router";
     NgIf,
     MatCheckboxModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    PlaylistEntryComponent,
+    PlaylistGridComponent
   ],
   templateUrl: './playlists-page.component.html',
   styleUrl: './playlists-page.component.css',
@@ -28,6 +32,7 @@ import {Router} from "@angular/router";
 export class PlaylistsPage implements OnInit {
   playlists: { playlist: Playlist, selected: boolean }[] = [];
   someSelected = false
+  selectCount = 0
 
   constructor(private playlistService: PlaylistService, private router: Router) {
 
@@ -51,7 +56,8 @@ export class PlaylistsPage implements OnInit {
     this.router.navigate(["ranking/songs"]).then()
   }
 
-  lockButton() {
+  handleSelectEvent(count: number) {
+    this.selectCount = count;
     this.someSelected = this.playlists.some(item => item.selected)
   }
 
