@@ -23,10 +23,10 @@ export class HeaderComponent {
   }
 
   logout() {
-
+    this.loginService.logout();
   }
 
   login() {
-    this.loginService.authorize()
+    this.loginService.authorize().then()
   }
 }

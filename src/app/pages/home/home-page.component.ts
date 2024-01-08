@@ -23,7 +23,7 @@ export class HomePageComponent {
   }
 
   login() {
-    this.loginService.authorize();
+    this.loginService.authorize().then();
   }
 
 }

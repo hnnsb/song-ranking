@@ -29,7 +29,6 @@ export class PlaylistService {
 
     return this.http.get<any>(
       playlistUrl.toString(),
-      {headers: this.headerWithToken()}
     ).pipe(tap((res) => this.currentPlaylistsSubject.next(res)))
   }
 
@@ -42,7 +41,7 @@ export class PlaylistService {
 
 
   getSongsForPlaylist(url: string) {
-    return this.http.get<{ items: { track: Track }[] }>(url, {headers: this.headerWithToken()})
+    return this.http.get<{ items: { track: Track }[] }>(url)
   }
 
   savePlaylist(name: string, userId: string, trackUris: string[]) {
@@ -53,18 +52,13 @@ export class PlaylistService {
     this.http.post<Playlist>(
       `${environment.spotifyApiUrl}/users/${userId}/playlists`,
       body,
-      {headers: this.headerWithToken()}
     ).subscribe(playlist => {
       console.log("Playlist created", playlist)
       this.http.post(
         playlist.tracks.href,
         {"uris": trackUris, "position": 0},
-        {headers: this.headerWithToken()}
       ).subscribe(res => console.log("added tracks", res))
     })
   }
 
-  headerWithToken() {
-    return {'Authorization': `Bearer ${localStorage.getItem("access_token")}`}
-  }
 }

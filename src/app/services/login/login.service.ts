@@ -1,10 +1,11 @@
-import {DestroyRef, inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {base64encode, generateRandomString, sha256} from "../../util/pcke-code-challenge";
+import {generateRandomString} from "../../util/pcke-code-challenge";
 import {TokenResponse} from "../../models/Spotify/tokenResponse";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../user/user.service";
+import {PckeService} from "../pcke/pcke.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +13,21 @@ import {UserService} from "../user/user.service";
 export class LoginService {
   codeVerifier = generateRandomString(64);
   codeChallenge: string = "";
-  destroyRef = inject(DestroyRef);
 
-  constructor(private http: HttpClient, private userService: UserService,
-              private router: Router) {
+  constructor(private http: HttpClient,
+              private userService: UserService,
+              private router: Router,
+              private pckeService: PckeService) {
   }
 
   // PCKE Flow:
   // 1. Generate code verifier
+  // -> PCKE Service
   // 2. Hash and encode code verifier to get code challenge
-  async initialize() {
-    const hashed = await sha256(this.codeVerifier)
-    this.codeChallenge = base64encode(hashed)
-    window.localStorage.setItem("code_verifier", this.codeVerifier)
-  }
+  // -> PCKE Service
 
   // 3. Authorize code challenge with Spotify Api
-  authorize() {
+  async authorize() {
     const authUrl = new URL(`${environment.spotifyAuthUrl}`)
     const scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private';
 
@@ -37,7 +36,7 @@ export class LoginService {
       client_id: `${environment.spotifyClientId}`,
       scope,
       code_challenge_method: "S256",
-      code_challenge: this.codeChallenge,
+      code_challenge: await this.pckeService.getCodeChallenge(),
       redirect_uri: `${environment.redirectUri}`
     }
     authUrl.search = new URLSearchParams(params).toString()
@@ -53,7 +52,7 @@ export class LoginService {
         code,
         redirect_uri: `${environment.redirectUri}`,
         client_id: `${environment.spotifyClientId}`,
-        code_verifier: window.localStorage.getItem("code_verifier")!
+        code_verifier: this.pckeService.getCodeVerifier()!
       }
 
       this.http.post<TokenResponse>(tokenUrl.toString(), new URLSearchParams(params),
@@ -70,7 +69,13 @@ export class LoginService {
       )
     } else {
       // User aborted access token sequence
-      this.router.navigate(["/"]).then()
+      this.router.navigate(["/"]).then();
     }
+  }
+
+  logout() {
+    this.pckeService.purgeTokens();
+    this.userService.purgeUser();
+    this.router.navigate(["/"]).then();
   }
 }

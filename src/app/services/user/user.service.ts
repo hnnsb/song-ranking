@@ -17,24 +17,13 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  login() {
-    return this.http.get<User>(
-      `${environment.spotifyApiUrl}/me`,
-      {headers: this.headerWithToken()}
-    ).pipe(tap(user => this.currentUserSubject.next(user)));
-  }
-
   getUser() {
     return this.http.get<User>(
       `${environment.spotifyApiUrl}/me`,
-      {headers: this.headerWithToken()}
     ).pipe(tap(user => this.currentUserSubject.next(user)));
   }
 
-
-  headerWithToken() {
-    return {'Authorization': `Bearer ${localStorage.getItem("access_token")}`}
+  purgeUser() {
+    this.currentUserSubject.next(null)
   }
-
-
 }
