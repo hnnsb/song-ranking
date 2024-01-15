@@ -66,7 +66,7 @@ export class RankingPageComponent implements OnInit {
               res.map(trackEntry => trackEntry.track.uri).slice(0, form.amount)
             )
           )
-        })
+        }).unsubscribe()
       },
       () => {
       }
