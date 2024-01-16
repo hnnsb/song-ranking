@@ -4,6 +4,7 @@ import {AuthComponent} from "./components/auth/auth.component";
 import {PlaylistsPage} from "./pages/playlists/playlists-page.component";
 import {HomePageComponent} from "./pages/home/home-page.component";
 import {RankingPageComponent} from "./pages/ranking/ranking-page.component";
+import {PlaylistSortingPageComponent} from "./pages/playlist-sorting-page/playlist-sorting-page.component";
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
       {path: 'songs', component: RankingPageComponent}
     ]
   },
+  {path: "sorting", component: PlaylistSortingPageComponent},
   {path: '**', component: HomePageComponent}
 ]
 

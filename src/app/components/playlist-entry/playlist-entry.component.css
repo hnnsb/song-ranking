@@ -8,3 +8,10 @@ mat-card {
   -moz-box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3);
 }
+
+.playlist-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
