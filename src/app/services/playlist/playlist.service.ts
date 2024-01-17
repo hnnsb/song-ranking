@@ -27,7 +27,7 @@ export class PlaylistService {
       .pipe(map(res => res.items))
   }
 
-  getSongs(): Observable<Track[]> {
+  getSongsOfSelected(): Observable<Track[]> {
     const playlistSongs = this.selectedPlaylistsLinks.map(
       (link: string) => this.getSongsOfPlaylist(link)
     );

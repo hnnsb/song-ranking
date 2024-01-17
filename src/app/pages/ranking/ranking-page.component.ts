@@ -40,7 +40,7 @@ export class RankingPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.playlistService.getSongs().subscribe(songs => {
+    this.playlistService.getSongsOfSelected().subscribe(songs => {
       this.eloService.setTracks(songs)
     });
 
