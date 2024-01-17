@@ -1,46 +1,48 @@
 <mat-card>
-  <mat-card-header class="d-flex justify-content-between mb-3">
-    <mat-card-title>
-      <button (click)="toggleEdit()"
-              (submit)="toggleEdit()"
-              class="btn rounded-circle mx-1"
-              type="submit"
-              [ngClass]="isEditing ? 'btn-primary':'btn-outline-primary'">
-        <i class="bi bi-pen"></i>
+  <div cdkDropList (cdkDropListDropped)="drop($event)"
+       [cdkDropListData]="tracks">
+    <mat-card-header class="d-flex justify-content-between mb-3">
+      <mat-card-title>
+        <button (click)="toggleEdit()"
+                (submit)="toggleEdit()"
+                class="btn rounded-circle mx-1"
+                type="submit"
+                [ngClass]="isEditing ? 'btn-primary':'btn-outline-primary'">
+          <i class="bi bi-pen"></i>
+        </button>
+        <!-- If is editing: Input for Category name -->
+        <ng-container *ngIf="isEditing; else elseBlock;">
+          <form class="d-inline" (submit)="edit(false)" (focusout)="edit(false)">
+            <input (focusout)="edit(false)"
+                   [(ngModel)]="categoryName"
+                   minlength="1"
+                   name="name"
+                   type="text">
+          </form>
+        </ng-container>
+        <!-- If not editing: Show category name -->
+        <ng-template #elseBlock>
+          <a (click)="toggleEdit()">
+            <span>{{categoryName}}</span>
+          </a>
+        </ng-template>
+      </mat-card-title>
+      <button aria-controls="card-content-{{index}}"
+              aria-expanded="false"
+              class="btn btn-primary"
+              data-bs-target="#card-content-{{index}}"
+              data-bs-toggle="collapse"
+              type="button"
+              [disabled]="tracks.length==0">
+        Expand
       </button>
-      <!-- If is editing: Input for Category name -->
-      <ng-container *ngIf="isEditing; else elseBlock;">
-        <form class="d-inline" (submit)="edit(false)" (focusout)="edit(false)">
-          <input (focusout)="edit(false)"
-                 [(ngModel)]="categoryName"
-                 minlength="1"
-                 name="name"
-                 type="text">
-        </form>
+    </mat-card-header>
+
+    <mat-card-content class="collapse" id="card-content-{{index}}">
+      <mat-divider></mat-divider>
+      <ng-container *ngFor="let track of tracks">
+        <app-track-entry cdkDrag class="mx-1" [track]="track"></app-track-entry>
       </ng-container>
-      <!-- If not editing: Show category name -->
-      <ng-template #elseBlock>
-        <a (click)="toggleEdit()">
-          <span>{{categoryName}}</span>
-        </a>
-      </ng-template>
-    </mat-card-title>
-    <button aria-controls="card-content"
-            aria-expanded="false"
-            class="btn btn-primary"
-            data-bs-target="#card-content"
-            data-bs-toggle="collapse"
-            type="button"
-            [disabled]="tracks.length==0">
-      Expand
-    </button>
-  </mat-card-header>
-
-  <mat-card-content class="collapse" id="card-content">
-    <mat-divider></mat-divider>
-    <ng-container *ngFor="let track of tracks">
-      <app-track-entry class="mx-1" [track]="track"></app-track-entry>
-    </ng-container>
-  </mat-card-content>
+    </mat-card-content>
+  </div>
 </mat-card>
-

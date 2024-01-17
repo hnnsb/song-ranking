@@ -5,6 +5,7 @@ import {TrackEntryComponent} from "../track-entry/track-entry.component";
 import {FormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
+import {CdkDrag, CdkDragDrop, CdkDropList} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-category-container',
@@ -16,15 +17,21 @@ import {MatDividerModule} from "@angular/material/divider";
     FormsModule,
     NgClass,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    CdkDrag,
+    CdkDropList
   ],
   templateUrl: './category-container.component.html',
   styleUrl: './category-container.component.css'
 })
 export class CategoryContainerComponent {
+  @Input() index: number = 0;
   @Input() tracks: Track[] = [];
   @Input() categoryName: string = "New Category";
+  
   @Output() categoryNameChange = new EventEmitter<string>;
+  @Output() propagateDropped = new EventEmitter<CdkDragDrop<Track[]>>;
+
 
   isEditing = false;
 
@@ -36,5 +43,9 @@ export class CategoryContainerComponent {
   edit(b: boolean) {
     this.isEditing = b;
     this.categoryNameChange.emit(this.categoryName);
+  }
+
+  drop(event: CdkDragDrop<Track[]>) {
+    this.propagateDropped.emit(event)
   }
 }

@@ -5,17 +5,26 @@ import {CategoryContainerComponent} from "../../components/category-container/ca
 import {PlaylistService} from "../../services/playlist/playlist.service";
 import {Track} from "../../models/Spotify/track";
 import {MatCardModule} from "@angular/material/card";
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem
+} from "@angular/cdk/drag-drop";
+import {TRACK} from "../../../stories/data/track";
 
 @Component({
   selector: 'app-playlist-sorting-page',
   standalone: true,
-  imports: [NgForOf, TrackEntryComponent, CategoryContainerComponent, MatCardModule],
+  imports: [NgForOf, TrackEntryComponent, CategoryContainerComponent, MatCardModule, CdkDropList, CdkDropListGroup, CdkDrag],
   templateUrl: './playlist-sorting-page.component.html',
   styleUrl: './playlist-sorting-page.component.css'
 })
 export class PlaylistSortingPageComponent implements OnInit {
-  source: Track[] = [];
-  targets: any[] = [];
+  source: Track[] = [TRACK, TRACK, TRACK, TRACK];
+  targets: { name: string, tracks: Track[] }[] = [];
 
   constructor(private playlistService: PlaylistService) {
   }
@@ -27,4 +36,18 @@ export class PlaylistSortingPageComponent implements OnInit {
   addCategory() {
     this.targets.push({name: "New Category", tracks: []})
   }
+
+  drop(event: CdkDragDrop<Track[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex)
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      )
+    }
+  }
+
 }
