@@ -4,6 +4,6 @@ import {TRACK} from "../data/track";
 
 export class MockPlaylistService implements Partial<PlaylistService> {
   getSongs = () => {
-    return of([[{track: TRACK}, {track: TRACK}]])
+    return of([TRACK, TRACK])
   }
 }

@@ -6,6 +6,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
 import {PlaylistService} from "../../services/playlist/playlist.service";
 import {MockPlaylistService} from "../../../stories/mock-services/mock-playlist-service";
+import {UserService} from "../../services/user/user.service";
 
 
 const meta: Meta<RankingPageComponent> = {
@@ -21,7 +22,8 @@ const meta: Meta<RankingPageComponent> = {
         HttpClientModule,
       ],
       providers: [
-        {provide: PlaylistService, useClass: MockPlaylistService}
+        {provide: PlaylistService, useClass: MockPlaylistService},
+        UserService
       ]
     }),
   ],
