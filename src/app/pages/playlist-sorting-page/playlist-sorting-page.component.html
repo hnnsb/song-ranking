@@ -10,9 +10,9 @@
             <div (cdkDropListDropped)="drop($event)"
                  [cdkDropListData]="source"
                  cdkDropList
-                 class="" style="min-height: 20px">
+                 style="min-height: 20px">
               <ng-container *ngFor="let item of source">
-                <app-track-entry class="mx-1" [track]="item" cdkDrag></app-track-entry>
+                <app-track-entry [track]="item" cdkDrag class="mx-1"></app-track-entry>
               </ng-container>
             </div>
           </mat-card-content>
@@ -22,14 +22,13 @@
         <h2>Categories</h2>
         <ng-container *ngFor="let cat of targets; index as i;">
           <app-category-container
-            [index]="i"
-            [tracks]="cat.tracks"
             (propagateDropped)="drop($event)"
+            [tracks]="cat.tracks"
             class="me-1"></app-category-container>
         </ng-container>
 
         <div class="d-flex justify-content-center">
-          <button class="btn btn-primary rounded-circle" (click)="addCategory()">+</button>
+          <button (click)="addCategory()" class="btn btn-primary rounded-circle">+</button>
         </div>
       </div>
     </div>

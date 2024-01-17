@@ -4,6 +4,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
 import {PlaylistSortingPageComponent} from "./playlist-sorting-page.component";
+import {PlaylistService} from "../../services/playlist/playlist.service";
+import {MockPlaylistService} from "../../../stories/mock-services/mock-playlist-service";
 
 
 const meta: Meta<PlaylistSortingPageComponent> = {
@@ -18,7 +20,9 @@ const meta: Meta<PlaylistSortingPageComponent> = {
         CommonModule,
         HttpClientModule,
       ],
-      providers: []
+      providers: [
+        {provide: PlaylistService, useClass: MockPlaylistService}
+      ]
     }),
   ],
 }
