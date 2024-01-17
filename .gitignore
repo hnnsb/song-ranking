@@ -2,7 +2,6 @@
 
 environment.development.ts
 /storybook-static
-/.storybook
 
 # Compiled output
 /dist
