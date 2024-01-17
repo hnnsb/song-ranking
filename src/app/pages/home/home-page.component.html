@@ -1,4 +1,5 @@
 <div class="page">
+  <!-- If NOT logged in  -->
   <ng-container *ngIf="!(this.userService.isLoggedIn | async); else elseBlock">
     <div class="container">
       <div class="text-center">
@@ -14,6 +15,7 @@
     </div>
   </ng-container>
 
+  <!--  If logged in -->
   <ng-template #elseBlock>
     <div class="container">
       <div class="row">
@@ -21,8 +23,7 @@
           <button type="button" class="btn btn-primary" routerLink="ranking/playlists">Rank your songs</button>
         </div>
         <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary" routerLink="sorting" disabled="{{true}}">Playlist Sorting
-          </button>
+          <button type="button" class="btn btn-primary" routerLink="sorting">Playlist Sorting</button>
         </div>
         <div class="col d-flex justify-content-center">
           <button type="button" class="btn btn-primary" routerLink="" disabled="{{true}}">Coming soon</button>
