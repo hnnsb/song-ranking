@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user/user.service";
+import {UserService} from "../../../services/user/user.service";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
-import {PlaylistService} from "../../services/playlist/playlist.service";
-import {Playlist} from "../../models/Spotify/playlist";
+import {PlaylistService} from "../../../services/playlist/playlist.service";
+import {Playlist} from "../../../models/Spotify/playlist";
 import {FormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
-import {PlaylistEntryComponent} from "../../components/playlist-entry/playlist-entry.component";
-import {PlaylistGridComponent} from "../../components/playlist-grid/playlist-grid.component";
+import {PlaylistEntryComponent} from "../../../components/playlist-entry/playlist-entry.component";
+import {PlaylistGridComponent} from "../../../components/playlist-grid/playlist-grid.component";
 
 @Component({
   selector: 'app-playlists-page',

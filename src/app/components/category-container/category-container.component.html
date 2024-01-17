@@ -27,10 +27,10 @@
           </a>
         </ng-template>
       </mat-card-title>
-      <button aria-controls="card-content-{{index}}"
+      <button aria-controls="card-content"
               aria-expanded="false"
               class="btn btn-primary"
-              data-bs-target="#card-content-{{index}}"
+              data-bs-target="#card-content"
               data-bs-toggle="collapse"
               type="button"
               [disabled]="tracks.length==0">
@@ -38,7 +38,7 @@
       </button>
     </mat-card-header>
 
-    <mat-card-content class="collapse" id="card-content-{{index}}">
+    <mat-card-content class="collapse" id="card-content">
       <mat-divider></mat-divider>
       <ng-container *ngFor="let track of tracks">
         <app-track-entry cdkDrag class="mx-1" [track]="track"></app-track-entry>

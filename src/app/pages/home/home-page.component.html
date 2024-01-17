@@ -19,14 +19,33 @@
   <ng-template #elseBlock>
     <div class="container">
       <div class="row">
-        <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary" routerLink="ranking/playlists">Rank your songs</button>
+        <h1 class="text-center">1: Select Playlists</h1>
+        Selected {{selectCount}} Tracks
+      </div>
+      <div class="row mb-3">
+        <app-playlist-grid [playlists]="playlists" (selectEvent)="handleSelectEvent($event)"></app-playlist-grid>
+      </div>
+      <div class="row ">
+        <h1 class="text-center">2: What do you want to do?</h1>
+        <div class="col d-flex flex-column">
+          <div class="m-auto">
+            <button type="button" class="btn btn-primary" (click)="goToRanking()" [disabled]="selectCount===0">Rank your
+              songs
+            </button>
+          </div>
+          <div class="m-auto">
+            <img src="assets/home-icons/ranking-placeholder.png" alt="song sorting">
+          </div>
         </div>
-        <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary" routerLink="sorting">Playlist Sorting</button>
-        </div>
-        <div class="col d-flex justify-content-center">
-          <button type="button" class="btn btn-primary" routerLink="" disabled="{{true}}">Coming soon</button>
+        <div class="col d-flex flex-column justify-content-center">
+          <div class="m-auto">
+            <button type="button" class="btn btn-primary" (click)="goToSorting()" [disabled]="selectCount===0">Playlist
+              Sorting
+            </button>
+          </div>
+          <div class="m-auto">
+            <img src="assets/home-icons/sorting-placeholder.png" alt="song sorting">
+          </div>
         </div>
       </div>
     </div>

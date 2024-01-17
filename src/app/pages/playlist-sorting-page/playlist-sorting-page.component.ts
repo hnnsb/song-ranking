@@ -13,7 +13,6 @@ import {
   moveItemInArray,
   transferArrayItem
 } from "@angular/cdk/drag-drop";
-import {TRACK} from "../../../stories/data/track";
 
 @Component({
   selector: 'app-playlist-sorting-page',
@@ -23,7 +22,7 @@ import {TRACK} from "../../../stories/data/track";
   styleUrl: './playlist-sorting-page.component.css'
 })
 export class PlaylistSortingPageComponent implements OnInit {
-  source: Track[] = [TRACK, TRACK, TRACK, TRACK];
+  source: Track[] = [];
   targets: { name: string, tracks: Track[] }[] = [];
 
   constructor(private playlistService: PlaylistService) {

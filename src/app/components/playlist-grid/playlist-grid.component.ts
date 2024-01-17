@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {PlaylistEntryComponent} from "../playlist-entry/playlist-entry.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgStyle} from "@angular/common";
 import {Playlist} from "../../models/Spotify/playlist";
 
 @Component({
@@ -8,7 +8,8 @@ import {Playlist} from "../../models/Spotify/playlist";
   standalone: true,
   imports: [
     PlaylistEntryComponent,
-    NgForOf
+    NgForOf,
+    NgStyle
   ],
   templateUrl: './playlist-grid.component.html',
   styleUrl: './playlist-grid.component.css'
@@ -21,8 +22,7 @@ export class PlaylistGridComponent {
   private selectCount: number = 0;
 
   getColumnStyles() {
-    // @ts-ignore
-    const width = document.getElementById("playlists").offsetWidth
+    const width = document.getElementById("playlists")!.offsetWidth
 
     const columnWidth = 300; // Adjust the width based on your design
     const columnCount = Math.floor(width / columnWidth); // Adjust the number 5 based on your design
