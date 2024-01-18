@@ -1,4 +1,4 @@
-<ng-container *ngIf="track != null">
+@if (track != null) {
   <div class="row">
     <div class="col-auto">
       <a href="{{track.album.external_urls.spotify}}" target="_blank">
@@ -8,13 +8,15 @@
     </div>
     <div class="col-auto my-auto">
       <a href="{{track.external_urls.spotify}}" target="_blank">
-        <b>{{track.name}}</b>
+        <b>{{ track.name }}</b>
       </a><br>
-      <span class="artist" *ngFor="let artist of track.artists;">
-        <a href="{{artist.external_urls.spotify}}" target="_blank">
-          <span>{{artist.name}}</span>
-        </a>
-      </span>
+      @for (artist of track.artists; track artist) {
+        <span class="artist">
+          <a href="{{artist.external_urls.spotify}}" target="_blank">
+            <span>{{ artist.name }}</span>
+          </a>
+        </span>
+      }
     </div>
   </div>
-</ng-container>
+}

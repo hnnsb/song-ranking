@@ -17,9 +17,11 @@
     </form>
   </div>
   <div class="modal-footer">
-    <div *ngIf="!f.valid" class="alert alert-warning" role="alert">
-      You have to provide a name and an amount to save the playlist.
-    </div>
+    @if (!f.valid) {
+      <div class="alert alert-warning" role="alert">
+        You have to provide a name and an amount to save the playlist.
+      </div>
+    }
     <div>
       <button type="button" class="btn btn-outline-secondary mx-2" (click)="activeModal.dismiss()" aria-label="Close">
         Close

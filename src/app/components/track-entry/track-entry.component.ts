@@ -1,14 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage} from "@angular/common";
 import {Track} from "../../models/Spotify/track";
 
 @Component({
   selector: 'app-track-entry',
   standalone: true,
   imports: [
-    NgOptimizedImage,
-    NgIf,
-    NgForOf
+    NgOptimizedImage
   ],
   templateUrl: './track-entry.component.html',
   styleUrl: './track-entry.component.css'

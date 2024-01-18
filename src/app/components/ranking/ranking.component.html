@@ -11,17 +11,17 @@
 </div>
 <mat-divider></mat-divider>
 <div class="scroll-box scroll-padding" [ngStyle]="{'max-height':maxHeight+'px'}">
-  <ng-container *ngFor="let entry of trackEntries">
+  @for (entry of trackEntries; track entry) {
     <div class="row py-2">
       <div class="col-auto my-auto">
-        <span>{{entry.elo | number: '1.0-0'}}</span>
+        <span>{{ entry.elo | number: '1.0-0' }}</span>
       </div>
       <div class="col-sm">
         <app-track-entry [track]="entry.track"></app-track-entry>
       </div>
       <div class="col-auto my-auto text-end">
-        <span>{{entry.matches}}</span>
+        <span>{{ entry.matches }}</span>
       </div>
     </div>
-  </ng-container>
+  }
 </div>

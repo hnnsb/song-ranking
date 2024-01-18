@@ -1,28 +1,31 @@
 <mat-card class=" d-flex justify-content-center align-items-center ">
-  <mat-card-content *ngIf="track != null">
-    <div class="m-auto py-2 d-flex justify-content-center align-items-center">
-      <a class="zoom" (click)="triggerChoice.emit()">
-        <img class="mx-1"
-             ngSrc="{{track!.album.images[0].url}}"
-             width="200"
-             height="200"
-             alt="song cover picture"
-        >
+  @if (track != null) {
+    <mat-card-content>
+      <div class="m-auto py-2 d-flex justify-content-center align-items-center">
+        <a class="zoom" (click)="triggerChoice.emit()">
+          <img class="mx-1"
+               ngSrc="{{track!.album.images[0].url}}"
+               width="200"
+               height="200"
+               alt="song cover picture"
+          >
+        </a>
+        <br>
+      </div>
+      <a href="{{track.external_urls.spotify}}" target="_blank">
+        <b>{{ track.name }}</b><br>
       </a>
-      <br>
-    </div>
-    <a href="{{track.external_urls.spotify}}" target="_blank">
-      <b>{{track.name}}</b><br>
-    </a>
-    <div class="m-auto" *ngFor="let artist of track.artists;">
-      <a href="{{artist.external_urls.spotify}}" target="_blank">
-        <span>{{artist.name}} </span>
-      </a>
-    </div>
-
-    <div class="m-auto pt-2">
-      <audio controls src="{{track.preview_url}}" [volume]="0.1" [controlsList]="'nodownload noplaybackrate'">
-      </audio>
-    </div>
-  </mat-card-content>
+      @for (artist of track.artists; track artist) {
+        <div class="m-auto">
+          <a href="{{artist.external_urls.spotify}}" target="_blank">
+            <span>{{ artist.name }} </span>
+          </a>
+        </div>
+      }
+      <div class="m-auto pt-2">
+        <audio controls src="{{track.preview_url}}" [volume]="0.1" [controlsList]="'nodownload noplaybackrate'">
+        </audio>
+      </div>
+    </mat-card-content>
+  }
 </mat-card>

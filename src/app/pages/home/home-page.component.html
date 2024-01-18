@@ -1,6 +1,6 @@
 <div class="page">
-  <!-- If NOT logged in  -->
-  <ng-container *ngIf="!(this.userService.isLoggedIn | async); else elseBlock">
+  @if (!(this.userService.isLoggedIn | async)) {
+    <!-- If NOT logged in  -->
     <div class="container">
       <div class="text-center">
         <h1>Login with Spotify</h1>
@@ -13,14 +13,12 @@
         </a>
       </div>
     </div>
-  </ng-container>
-
-  <!--  If logged in -->
-  <ng-template #elseBlock>
+  } @else {
+    <!--    If logged in-->
     <div class="container">
       <div class="row">
         <h1 class="text-center">1: Select Playlists</h1>
-        Selected {{selectCount}} Tracks
+        Selected {{ selectCount }} Tracks
       </div>
       <div class="row mb-3">
         <app-playlist-grid [playlists]="playlists" (selectEvent)="handleSelectEvent($event)"></app-playlist-grid>
@@ -49,5 +47,5 @@
         </div>
       </div>
     </div>
-  </ng-template>
+  }
 </div>

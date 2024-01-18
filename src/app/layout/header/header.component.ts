@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
+import {AsyncPipe, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {UserService} from "../../services/user/user.service";
 import {LoginService} from "../../services/login/login.service";
@@ -9,7 +9,6 @@ import {LoginService} from "../../services/login/login.service";
   standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
     RouterLink,
     NgOptimizedImage
   ],

@@ -10,8 +10,8 @@
                 [ngClass]="isEditing ? 'btn-primary':'btn-outline-primary'">
           <i class="bi bi-pen"></i>
         </button>
-        <!-- If is editing: Input for Category name -->
-        <ng-container *ngIf="isEditing; else elseBlock;">
+        @if (isEditing) {
+          <!-- If is editing: Input for Category name -->
           <form class="d-inline" (submit)="edit(false)" (focusout)="edit(false)">
             <input (focusout)="edit(false)"
                    [(ngModel)]="categoryName"
@@ -19,13 +19,12 @@
                    name="name"
                    type="text">
           </form>
-        </ng-container>
-        <!-- If not editing: Show category name -->
-        <ng-template #elseBlock>
+        } @else {
+          <!-- If not editing: Show category name -->
           <a (click)="toggleEdit()">
-            <span>{{categoryName}}</span>
+            <span>{{ categoryName }}</span>
           </a>
-        </ng-template>
+        }
       </mat-card-title>
       <button aria-controls="card-content"
               aria-expanded="false"
@@ -40,9 +39,9 @@
 
     <mat-card-content class="collapse" id="card-content">
       <mat-divider></mat-divider>
-      <ng-container *ngFor="let track of tracks">
+      @for (track of tracks; track track) {
         <app-track-entry cdkDrag class="mx-1" [track]="track"></app-track-entry>
-      </ng-container>
+      }
     </mat-card-content>
   </div>
 </mat-card>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {LoginService} from "../../services/login/login.service";
 import {UserService} from "../../services/user/user.service";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe} from "@angular/common";
 import {PlaylistGridComponent} from "../../components/playlist-grid/playlist-grid.component";
 import {Playlist} from "../../models/Spotify/playlist";
 import {PlaylistService} from "../../services/playlist/playlist.service";
@@ -13,7 +13,6 @@ import {PlaylistService} from "../../services/playlist/playlist.service";
   templateUrl: './home-page.component.html',
   imports: [
     AsyncPipe,
-    NgIf,
     RouterLink,
     PlaylistGridComponent
   ],

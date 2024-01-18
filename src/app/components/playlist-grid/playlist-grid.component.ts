@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {PlaylistEntryComponent} from "../playlist-entry/playlist-entry.component";
-import {NgForOf, NgStyle} from "@angular/common";
+import {NgStyle} from "@angular/common";
 import {Playlist} from "../../models/Spotify/playlist";
 
 @Component({
@@ -8,7 +8,6 @@ import {Playlist} from "../../models/Spotify/playlist";
   standalone: true,
   imports: [
     PlaylistEntryComponent,
-    NgForOf,
     NgStyle
   ],
   templateUrl: './playlist-grid.component.html',

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForOf} from "@angular/common";
 import {TrackEntryComponent} from "../../components/track-entry/track-entry.component";
 import {CategoryContainerComponent} from "../../components/category-container/category-container.component";
 import {PlaylistService} from "../../services/playlist/playlist.service";
@@ -17,7 +16,14 @@ import {
 @Component({
   selector: 'app-playlist-sorting-page',
   standalone: true,
-  imports: [NgForOf, TrackEntryComponent, CategoryContainerComponent, MatCardModule, CdkDropList, CdkDropListGroup, CdkDrag],
+  imports: [
+    TrackEntryComponent,
+    CategoryContainerComponent,
+    MatCardModule,
+    CdkDropList,
+    CdkDropListGroup,
+    CdkDrag
+  ],
   templateUrl: './playlist-sorting-page.component.html',
   styleUrl: './playlist-sorting-page.component.css'
 })

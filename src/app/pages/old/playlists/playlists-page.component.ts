@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user/user.service";
-import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage} from "@angular/common";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
@@ -15,9 +15,7 @@ import {PlaylistGridComponent} from "../../../components/playlist-grid/playlist-
   selector: 'app-playlists-page',
   standalone: true,
   imports: [
-    NgForOf,
     NgOptimizedImage,
-    NgIf,
     MatCheckboxModule,
     MatButtonModule,
     FormsModule,

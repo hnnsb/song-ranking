@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PlaylistService} from "../../services/playlist/playlist.service";
-import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {AsyncPipe, NgOptimizedImage} from "@angular/common";
 import {TrackEntryComponent} from "../../components/track-entry/track-entry.component";
 import {RankingComponent} from "../../components/ranking/ranking.component";
 import {TrackCardComponent} from "../../components/track-card/track-card.component";
@@ -18,12 +18,10 @@ import {UserService} from "../../services/user/user.service";
   standalone: true,
   imports: [
     NgOptimizedImage,
-    NgForOf,
     TrackEntryComponent,
     RankingComponent,
     TrackCardComponent,
     AsyncPipe,
-    NgIf,
     MatCardModule,
   ],
   templateUrl: './ranking-page.component.html',

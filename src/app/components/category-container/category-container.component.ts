@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Track} from "../../models/Spotify/track";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgClass} from "@angular/common";
 import {TrackEntryComponent} from "../track-entry/track-entry.component";
 import {FormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
@@ -11,9 +11,7 @@ import {CdkDrag, CdkDragDrop, CdkDropList} from "@angular/cdk/drag-drop";
   selector: 'app-category-container',
   standalone: true,
   imports: [
-    NgForOf,
     TrackEntryComponent,
-    NgIf,
     FormsModule,
     NgClass,
     MatCardModule,
