@@ -30,21 +30,24 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.playlistService.getPlaylists().subscribe(
-      res => {
-        this.playlists = res.map(playlist => {
-          return {playlist, selected: false}
-        })
+    this.userService.isLoggedIn.subscribe(loggedIn => {
+      if (loggedIn) {
+        this.playlistService.getPlaylists().subscribe(
+          res => {
+            this.playlists = res.map(playlist => {
+              return {playlist, selected: false}
+            })
+          }
+        );
       }
-    );
+    }).unsubscribe()
+
   }
 
   choosePlaylists() {
     this.playlistService.selectedPlaylistsLinks = this.playlists
       .filter(item => item.selected)
       .map(item => item.playlist.tracks.href)
-
-
   }
 
   handleSelectEvent(count: number) {

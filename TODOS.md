@@ -7,4 +7,5 @@
   - Delete Category
   - Save Category to playlist
   - Move Bulk?
+  - Recommendations for move (from selected songs)
 - Problem: Sorting page toggling collapse toggles all
