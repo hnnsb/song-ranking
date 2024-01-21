@@ -1,11 +1,15 @@
 # TODOs
 
-- Playlist without Cover Pictures or without tracks crash the playlist listing.
+- Auth/Login:
+  - Login fails 3 times on first page load
+  - Token refresh  
 - Text wrapping on entry components
-- Token refresh
 - More functionalities for sorting
   - Delete Category
   - Save Category to playlist
   - Move Bulk?
   - Recommendations for move (from selected songs)
   - sort presets: language, vibe, Tempo, ... (Audio Features)
+- Playlistgrid:
+  - Centering of component
+  - Playlist without Cover Pictures or without tracks crash the playlist grid (?)
