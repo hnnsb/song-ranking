@@ -26,18 +26,18 @@
           </a>
         }
       </mat-card-title>
-      <button aria-controls="card-content"
+      <button [attr.data-bs-target]="'#card-content-'+index"
+              [disabled]="tracks.length==0"
+              aria-controls="card-content"
               aria-expanded="false"
               class="btn btn-primary"
-              data-bs-target="#card-content"
               data-bs-toggle="collapse"
-              type="button"
-              [disabled]="tracks.length==0">
+              type="button">
         Expand
       </button>
     </mat-card-header>
 
-    <mat-card-content class="collapse" id="card-content">
+    <mat-card-content [attr.id]="'card-content-'+index" class="collapse">
       <mat-divider></mat-divider>
       @for (track of tracks; track track) {
         <app-track-entry cdkDrag class="mx-1" [track]="track"></app-track-entry>

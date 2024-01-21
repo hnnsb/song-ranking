@@ -25,6 +25,7 @@ import {CdkDrag, CdkDragDrop, CdkDropList} from "@angular/cdk/drag-drop";
 export class CategoryContainerComponent {
   @Input() tracks: Track[] = [];
   @Input() categoryName: string = "New Category";
+  @Input() index = 0;
 
   @Output() categoryNameChange = new EventEmitter<string>;
   @Output() propagateDropped = new EventEmitter<CdkDragDrop<Track[]>>;
