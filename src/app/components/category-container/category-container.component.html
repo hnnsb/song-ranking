@@ -5,7 +5,7 @@
       <mat-card-title>
         <button (click)="toggleEdit()"
                 (submit)="toggleEdit()"
-                class="btn rounded-circle mx-1"
+                class="btn rounded-5 mx-1"
                 type="submit"
                 [ngClass]="isEditing ? 'btn-primary':'btn-outline-primary'">
           <i class="bi bi-pen"></i>
@@ -26,15 +26,24 @@
           </a>
         }
       </mat-card-title>
-      <button [attr.data-bs-target]="'#card-content-'+index"
-              [disabled]="tracks.length==0"
-              aria-controls="card-content"
-              aria-expanded="false"
-              class="btn btn-primary"
-              data-bs-toggle="collapse"
-              type="button">
-        Expand
-      </button>
+      <div>
+        <button (click)="deleteCategory()" class="btn rounded-5 mx-3 btn-outline-danger align-content-center">
+          <i class="bi bi-trash"></i>
+        </button>
+        <button (click)="saveToPlaylist()" class="btn rounded-5 mx-3 btn-outline-success">
+          <i class="bi bi-floppy"></i>
+        </button>
+        <button (click)="toggleCollapse()"
+                [attr.data-bs-target]="'#card-content-'+index"
+                [disabled]="tracks.length==0"
+                aria-controls="card-content"
+                aria-expanded="false"
+                class="btn rounded-5 btn-primary ms-3"
+                data-bs-toggle="collapse"
+                type="button">
+          <i class="bi" [ngClass]="{'bi-caret-up':!isCollapsed, 'bi-caret-down':isCollapsed, }"></i>
+        </button>
+      </div>
     </mat-card-header>
 
     <mat-card-content [attr.id]="'card-content-'+index" class="collapse">

@@ -23,13 +23,15 @@
         @for (cat of targets; track cat; let i = $index) {
           <app-category-container
             (propagateDropped)="drop($event)"
+            (delete)="deleteCategory($event, i)"
             [tracks]="cat.tracks"
             [index]="i"
             class="me-1"></app-category-container>
         }
-
         <div class="d-flex justify-content-center">
-          <button (click)="addCategory()" class="btn btn-primary rounded-circle">+</button>
+          <button (click)="addCategory()" class="btn btn-primary rounded-5">
+            <i class="bi bi-plus-circle" style="font-size:20px"></i>
+          </button>
         </div>
       </div>
     </div>

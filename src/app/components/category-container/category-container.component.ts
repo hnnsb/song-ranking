@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {CdkDrag, CdkDragDrop, CdkDropList} from "@angular/cdk/drag-drop";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-category-container',
@@ -17,7 +18,8 @@ import {CdkDrag, CdkDragDrop, CdkDropList} from "@angular/cdk/drag-drop";
     MatCardModule,
     MatDividerModule,
     CdkDrag,
-    CdkDropList
+    CdkDropList,
+    MatButtonModule
   ],
   templateUrl: './category-container.component.html',
   styleUrl: './category-container.component.css'
@@ -29,9 +31,10 @@ export class CategoryContainerComponent {
 
   @Output() categoryNameChange = new EventEmitter<string>;
   @Output() propagateDropped = new EventEmitter<CdkDragDrop<Track[]>>;
-
+  @Output() delete = new EventEmitter<Track[]>;
 
   isEditing = false;
+  isCollapsed = true;
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
@@ -44,6 +47,18 @@ export class CategoryContainerComponent {
   }
 
   drop(event: CdkDragDrop<Track[]>) {
-    this.propagateDropped.emit(event)
+    this.propagateDropped.emit(event);
+  }
+
+  toggleCollapse() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  saveToPlaylist() {
+
+  }
+
+  deleteCategory() {
+    this.delete.emit(this.tracks);
   }
 }

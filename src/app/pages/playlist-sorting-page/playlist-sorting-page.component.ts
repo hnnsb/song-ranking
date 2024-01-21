@@ -55,4 +55,10 @@ export class PlaylistSortingPageComponent implements OnInit {
     }
   }
 
+  deleteCategory($event: Track[], index: number) {
+    $event.forEach((track, i) => {
+      transferArrayItem(this.targets[index].tracks, this.source, i, i)
+    })
+    this.targets.splice(index, 1)
+  }
 }
