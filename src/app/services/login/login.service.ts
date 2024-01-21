@@ -67,9 +67,11 @@ export class LoginService {
 
             })
           },
-          error: () => {
+          error: (err) => {
             this.logout()
-            this.authorize().then()
+            console.log("auth failed")
+            console.log(err)
+            // this.authorize().then()
           }
         }
       )

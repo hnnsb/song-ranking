@@ -17,27 +17,33 @@ export class PckeService {
   }
 
   async initialize() {
-    if (localStorage.getItem("access_token") != null) {
-      this.userService.getUser().subscribe()
-      return
+    const curAccessToken = localStorage.getItem("access_token");
+    if (curAccessToken !== null && curAccessToken !== "") {
+      this.userService.getUser().subscribe({
+        error: () => {
+          this.destroyAccessToken();
+          this.destroyRefreshToken();
+        }
+      });
+      return;
     }
 
-    const hashed = await sha256(this.codeVerifier)
-    this.codeChallenge = base64encode(hashed)
-    this.setCodeVerifier(this.codeVerifier)
+    const hashed = await sha256(this.codeVerifier);
+    this.codeChallenge = base64encode(hashed);
+    this.setCodeVerifier(this.codeVerifier);
   }
 
 
   purgeTokens() {
-    this.destroyAccessToken()
-    this.destroyRefreshToken()
+    this.destroyAccessToken();
+    this.destroyRefreshToken();
   }
 
   async getCodeChallenge() {
     if (this.codeChallenge != null) {
-      return this.codeChallenge
+      return this.codeChallenge;
     }
-    return base64encode(await sha256(this.codeVerifier))
+    return base64encode(await sha256(this.codeVerifier));
   }
 
   getCodeVerifier() {
@@ -49,7 +55,7 @@ export class PckeService {
   }
 
   destroyCodeVerifier() {
-    window.localStorage.removeItem(CODE_VERIFIER)
+    window.localStorage.removeItem(CODE_VERIFIER);
   }
 
   getAccessToken() {
@@ -61,11 +67,12 @@ export class PckeService {
   }
 
   destroyAccessToken() {
-    window.localStorage.removeItem(ACCESS_TOKEN)
+    window.localStorage.removeItem(ACCESS_TOKEN);
   }
 
   getRefreshToken() {
     return window.localStorage.getItem(REFRESH_TOKEN);
+
   }
 
   setRefreshToken(refreshToken: string) {
@@ -73,6 +80,6 @@ export class PckeService {
   }
 
   destroyRefreshToken() {
-    window.localStorage.removeItem(REFRESH_TOKEN)
+    window.localStorage.removeItem(REFRESH_TOKEN);
   }
 }
