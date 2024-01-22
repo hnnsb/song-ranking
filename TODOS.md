@@ -5,8 +5,7 @@
   - Token refresh
 - Text wrapping on entry components
 - More functionalities for sorting
-  - Delete Category (Add confirmation modal)
-  - Save Category to playlist (Add functionality)
+  - Delete Category/Save Category (Add Boostrap Toast/Anfular mat snackbar)
   - Move Bulk?
   - Recommendations for move (from selected songs)
   - sort presets: language, vibe, Tempo, ... (Audio Features)

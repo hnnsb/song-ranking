@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SavePlaylistModalComponent } from './save-playlist-modal.component';
+import { CategorySaveModal } from './category-save-modal.component';
 
 describe('SavePlaylistModalComponent', () => {
-  let component: SavePlaylistModalComponent;
-  let fixture: ComponentFixture<SavePlaylistModalComponent>;
+  let component: CategorySaveModal;
+  let fixture: ComponentFixture<CategorySaveModal>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SavePlaylistModalComponent]
+      imports: [CategorySaveModal]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(SavePlaylistModalComponent);
+
+    fixture = TestBed.createComponent(CategorySaveModal);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

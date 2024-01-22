@@ -24,6 +24,7 @@
           <app-category-container
             (propagateDropped)="drop($event)"
             (delete)="deleteCategory($event, i)"
+            (save)="saveCategory($event, cat.name)"
             [tracks]="cat.tracks"
             [index]="i"
             class="me-1"></app-category-container>

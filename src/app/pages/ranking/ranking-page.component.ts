@@ -9,7 +9,7 @@ import {TrackEntry} from "../../models/track-entry";
 import {Observable, of} from "rxjs";
 import {MatchUp} from "../../models/match-up";
 import {MatCardModule} from "@angular/material/card";
-import {SavePlaylistModalComponent} from "../../components/save-playlist-modal/save-playlist-modal.component";
+import {PlaylistSaveModalComponent} from "../../components/playlist-save-modal/playlist-save-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UserService} from "../../services/user/user.service";
 
@@ -53,21 +53,18 @@ export class RankingPageComponent implements OnInit {
   }
 
   savePlaylist() {
-    const modalRef = this.modalService.open(SavePlaylistModalComponent)
+    const modalRef = this.modalService.open(PlaylistSaveModalComponent)
 
-    modalRef.result.then(form => {
-        this.eloService.getTrackEntries().subscribe(res => {
-          this.userService.currentUser.subscribe(user =>
-            this.playlistService.savePlaylist(
-              form.name,
-              user!.id,
-              res.map(trackEntry => trackEntry.track.uri).slice(0, form.amount)
-            )
+    modalRef.result.then(form =>
+      this.eloService.getTrackEntries().subscribe(res =>
+        this.userService.currentUser.subscribe(user =>
+          this.playlistService.savePlaylist(
+            form.name,
+            user!.id,
+            res.map(trackEntry => trackEntry.track.uri).slice(0, form.amount)
           )
-        }).unsubscribe()
-      },
-      () => {
-      }
-    )
+        )
+      ).unsubscribe()
+    );
   }
 }
