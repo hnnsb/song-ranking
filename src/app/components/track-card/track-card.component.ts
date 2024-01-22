@@ -16,4 +16,5 @@ import {NgOptimizedImage} from "@angular/common";
 export class TrackCardComponent {
   @Input() track: Track | null = null;
   @Output() triggerChoice = new EventEmitter();
+  @Output() play = new EventEmitter();
 }

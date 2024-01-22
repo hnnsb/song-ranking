@@ -64,13 +64,11 @@ export class LoginService {
 
             this.userService.getUser().subscribe({
               next: () => this.router.navigate(["/"]),
-
             })
           },
           error: (err) => {
             this.logout()
-            console.log("auth failed")
-            console.log(err)
+            console.log("Auth failed", err)
             // this.authorize().then()
           }
         }

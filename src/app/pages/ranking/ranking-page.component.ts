@@ -42,14 +42,24 @@ export class RankingPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.playlistService.getSongsOfSelected().subscribe(songs => {
+    this.playlistService.getSongsOfSelected().subscribe(songs =>
       this.eloService.setTracks(songs)
-    });
+    );
 
     this.trackEntries$ = this.eloService.getTrackEntries()
     this.eloService.getMatchUp().subscribe(matchUp =>
       this.matchUp = matchUp
     )
+  }
+
+  play(event: any) {
+    let audios = document.getElementsByTagName('audio')
+    //NOSONAR(typescript:S4138)
+    for (let i = 0; i < audios.length; i++) {
+      if (audios[i] !== event.target) {
+        audios[i].pause()
+      }
+    }
   }
 
   chooseWinner(winner: number) {

@@ -23,7 +23,11 @@
         </div>
       }
       <div class="m-auto pt-2">
-        <audio controls src="{{track.preview_url}}" [volume]="0.1" [controlsList]="'nodownload noplaybackrate'">
+        <audio controls
+               src="{{track.preview_url}}"
+               (play)="play.emit($event)"
+               [volume]="0.1"
+               [controlsList]="'nodownload noplaybackrate'">
         </audio>
       </div>
     </mat-card-content>

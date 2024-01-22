@@ -77,9 +77,10 @@ export class EloService {
   }
 
   updateTrackEntriesSubject() {
-    this.trackEntriesSubject.next([...this.trackEntries.sort((a, b) =>
-      b.elo - a.elo
-    )]);
+    this.trackEntriesSubject.next([...this.trackEntries].sort((a, b) =>
+        b.elo - a.elo
+      )
+    );
   }
 
   setTracks(tracks: Track[]) {
