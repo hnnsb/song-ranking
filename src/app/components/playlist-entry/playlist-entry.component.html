@@ -3,14 +3,18 @@
     <mat-card-content>
       <div class="row">
         <div class="col-auto">
-          <img ngSrc="{{playlist!.images[0].url}}" width="50" height="50" alt="playlist cover picture">
+          @if (playlist!.images[0]) {
+            <img ngSrc="{{playlist!.images[0].url}}" width="50" height="50" alt="playlist cover picture">
+          } @else {
+            <div class="img-placeholder"></div>
+          }
         </div>
         <div class="col-auto d-flex flex-column my-auto">
           <div class="row playlist-wrapper">
-            <span class="playlist-name"><b>{{playlist!.name}}</b></span>
+            <span class="playlist-name"><b>{{ playlist!.name }}</b></span>
           </div>
           <div class="row">
-            <span>{{playlist!.tracks.total}} Tracks</span>
+            <span>{{ playlist!.tracks.total }} Tracks</span>
           </div>
         </div>
       </div>

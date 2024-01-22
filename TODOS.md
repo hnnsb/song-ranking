@@ -10,5 +10,4 @@
   - Recommendations for move (from selected songs)
   - sort presets: language, vibe, Tempo, ... (Audio Features)
 - Playlistgrid:
-  - Playlist without Cover Pictures or without tracks crash the playlist grid (?)
 - Loading: Load skeletons
