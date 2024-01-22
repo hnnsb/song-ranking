@@ -41,7 +41,7 @@ export class PlaylistService {
         map(trackList =>
           trackList.items.map(item => item.track)
         )
-      )
+      );
   }
 
   savePlaylist(name: string, userId: string, trackUris: string[]) {
