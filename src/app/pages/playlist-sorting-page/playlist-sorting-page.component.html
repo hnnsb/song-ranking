@@ -19,7 +19,18 @@
         </mat-card>
       </div>
       <div class="col">
-        <h2>Categories</h2>
+        <div class="d-flex flex-row justify-content-between">
+
+          <h2>Categories</h2>
+          <div class="mx-1">
+            <button (click)="collapseAll.set(true)" title="collapse all" class="btn btn-outline-primary mx-2">
+              <i class="bi bi-chevron-bar-contract"></i>
+            </button>
+            <button (click)="collapseAll.set(false)" title="expand all" class="btn btn-outline-primary">
+              <i class="bi bi-chevron-bar-expand"></i>
+            </button>
+          </div>
+        </div>
         @for (cat of targets; track cat; let i = $index) {
           <app-category-container
             (propagateDropped)="drop($event)"
@@ -27,10 +38,11 @@
             (save)="saveCategory($event, cat.name)"
             [tracks]="cat.tracks"
             [index]="i"
+            [isCollapsed]="collapseAll()"
             class="me-1"></app-category-container>
         }
         <div class="d-flex justify-content-center">
-          <button (click)="addCategory()" class="btn btn-primary rounded-5">
+          <button (click)="addCategory()" title="add category" class="btn btn-primary rounded-5">
             <i class="bi bi-plus-circle" style="font-size:20px"></i>
           </button>
         </div>

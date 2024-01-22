@@ -28,6 +28,7 @@ export class CategoryContainerComponent {
   @Input() tracks: Track[] = [];
   @Input() categoryName: string = "New Category";
   @Input() index = 0;
+  @Input() isCollapsed = true;
 
   @Output() categoryNameChange = new EventEmitter<string>;
   @Output() propagateDropped = new EventEmitter<CdkDragDrop<Track[]>>;
@@ -35,7 +36,6 @@ export class CategoryContainerComponent {
   @Output() save = new EventEmitter<Track[]>;
 
   isEditing = false;
-  isCollapsed = true;
 
   toggleEdit() {
     this.isEditing = !this.isEditing;

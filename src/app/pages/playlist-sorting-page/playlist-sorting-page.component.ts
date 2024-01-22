@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {TrackEntryComponent} from "../../components/track-entry/track-entry.component";
 import {CategoryContainerComponent} from "../../components/category-container/category-container.component";
 import {PlaylistService} from "../../services/playlist/playlist.service";
@@ -34,6 +34,8 @@ import {UserService} from "../../services/user/user.service";
 export class PlaylistSortingPageComponent implements OnInit {
   source: Track[] = [];
   targets: { name: string, tracks: Track[] }[] = [];
+
+  collapseAll = signal(true);
 
   constructor(private userService: UserService,
               private playlistService: PlaylistService,
