@@ -2,13 +2,19 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {PlaylistEntryComponent} from "../playlist-entry/playlist-entry.component";
 import {NgStyle} from "@angular/common";
 import {Playlist} from "../../models/Spotify/playlist";
+import {CdkDrag} from "@angular/cdk/drag-drop";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
+import {TrackEntryComponent} from "../track-entry/track-entry.component";
 
 @Component({
   selector: 'app-playlist-grid',
   standalone: true,
   imports: [
     PlaylistEntryComponent,
-    NgStyle
+    NgStyle,
+    CdkDrag,
+    NgxSkeletonLoaderModule,
+    TrackEntryComponent
   ],
   templateUrl: './playlist-grid.component.html',
   styleUrl: './playlist-grid.component.css'

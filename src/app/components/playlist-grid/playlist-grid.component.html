@@ -1,7 +1,11 @@
 <div class="m-auto" id="playlists" [style]="getColumnStyles()">
-  @for (item of playlists; track item) {
-    <app-playlist-entry (selectEvent)="select($event, item)"
-                        [playlist]="item.playlist">
-    </app-playlist-entry>
+  @defer {
+    @for (item of playlists; track item) {
+      <app-playlist-entry (selectEvent)="select($event, item)"
+                          [playlist]="item.playlist">
+      </app-playlist-entry>
+    }
+  } @placeholder (minimum 500ms) {
+    <ngx-skeleton-loader count="1" [theme]="{height: '82px', borderRadius:'15px'}"/>
   }
 </div>

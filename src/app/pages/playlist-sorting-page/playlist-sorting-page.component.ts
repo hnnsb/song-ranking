@@ -16,6 +16,7 @@ import {CategoryDeleteModal} from "../../components/category-delete-modal/catego
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CategorySaveModal} from "../../components/category-save-modal/category-save-modal.component";
 import {UserService} from "../../services/user/user.service";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @Component({
   selector: 'app-playlist-sorting-page',
@@ -26,7 +27,8 @@ import {UserService} from "../../services/user/user.service";
     MatCardModule,
     CdkDropList,
     CdkDropListGroup,
-    CdkDrag
+    CdkDrag,
+    NgxSkeletonLoaderModule
   ],
   templateUrl: './playlist-sorting-page.component.html',
   styleUrl: './playlist-sorting-page.component.css'

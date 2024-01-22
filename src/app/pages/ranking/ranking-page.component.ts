@@ -12,6 +12,8 @@ import {MatCardModule} from "@angular/material/card";
 import {PlaylistSaveModalComponent} from "../../components/playlist-save-modal/playlist-save-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UserService} from "../../services/user/user.service";
+import {CdkDrag} from "@angular/cdk/drag-drop";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @Component({
   selector: 'app-ranking-page',
@@ -23,6 +25,8 @@ import {UserService} from "../../services/user/user.service";
     TrackCardComponent,
     AsyncPipe,
     MatCardModule,
+    CdkDrag,
+    NgxSkeletonLoaderModule,
   ],
   templateUrl: './ranking-page.component.html',
   styleUrl: './ranking-page.component.css'
