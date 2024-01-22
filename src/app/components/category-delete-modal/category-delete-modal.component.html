@@ -8,19 +8,26 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>Do you really want to save delete the category {{categoryName}}.</p>
+    <p>
+      Do you really want to delete the category '{{ categoryName }}',
+      {{ amount }} tracks will be moved back to the selected songs.
+    </p>
   </div>
   <div class="modal-footer">
     <div>
+      <button (click)="activeModal.close()"
+              aria-label="Delete"
+              class="btn btn-danger"
+              type="button">
+        Delete Category
+      </button>
       <button (click)="activeModal.dismiss('close')"
               aria-label="Close"
               class="btn btn-outline-secondary mx-2"
               type="button">
         Abort
       </button>
-      <button type="button" class="btn btn-danger" (click)="activeModal.close()">
-        Delete Category
-      </button>
+
     </div>
   </div>
 </div>

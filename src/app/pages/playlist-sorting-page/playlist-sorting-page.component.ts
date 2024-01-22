@@ -65,6 +65,8 @@ export class PlaylistSortingPageComponent implements OnInit {
 
   deleteCategory($event: Track[], index: number) {
     const modalRef = this.modalService.open(CategoryDeleteModal)
+    modalRef.componentInstance.categoryName = this.targets[index].name;
+    modalRef.componentInstance.amount = this.targets[index].tracks.length;
 
     modalRef.result.then(() => {
         $event.forEach((track, i) =>
@@ -77,6 +79,8 @@ export class PlaylistSortingPageComponent implements OnInit {
 
   saveCategory($event: Track[], name: string) {
     const modalRef = this.modalService.open(CategorySaveModal)
+    modalRef.componentInstance.categoryName = name;
+    modalRef.componentInstance.amount = $event.length;
 
     modalRef.result.then(() =>
       this.userService.currentUser.subscribe(user =>

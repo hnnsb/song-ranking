@@ -1,6 +1,6 @@
 import {Component, inject, Input} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {FormsModule, NgForm} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'modal-save-playlist',
@@ -14,8 +14,7 @@ import {FormsModule, NgForm} from "@angular/forms";
 export class CategorySaveModal {
   activeModal = inject(NgbActiveModal);
 
-  @Input() categoryName="";
-  onSubmit(f: NgForm) {
-    this.activeModal.close(f.value)
-  }
+  @Input() categoryName = "";
+  @Input() amount = 0;
+
 }

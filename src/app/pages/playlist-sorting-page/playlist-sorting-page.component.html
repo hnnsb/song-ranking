@@ -23,10 +23,10 @@
 
           <h2>Categories</h2>
           <div class="mx-1">
-            <button (click)="collapseAll.set(true)" title="collapse all" class="btn btn-outline-primary mx-2">
+            <button (click)="collapseAll.set(true)" class="btn btn-outline-primary mx-2" title="collapse all">
               <i class="bi bi-chevron-bar-contract"></i>
             </button>
-            <button (click)="collapseAll.set(false)" title="expand all" class="btn btn-outline-primary">
+            <button (click)="collapseAll.set(false)" class="btn btn-outline-primary" title="expand all">
               <i class="bi bi-chevron-bar-expand"></i>
             </button>
           </div>
@@ -42,7 +42,7 @@
             class="me-1"></app-category-container>
         }
         <div class="d-flex justify-content-center">
-          <button (click)="addCategory()" title="add category" class="btn btn-primary rounded-5">
+          <button (click)="addCategory()" class="btn btn-primary rounded-5" title="add category">
             <i class="bi bi-plus-circle" style="font-size:20px"></i>
           </button>
         </div>

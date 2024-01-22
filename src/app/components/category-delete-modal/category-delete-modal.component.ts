@@ -15,8 +15,6 @@ export class CategoryDeleteModal {
   activeModal = inject(NgbActiveModal);
 
   @Input() categoryName = "";
-
-  onSubmit() {
-    this.activeModal.close();
-  }
+  @Input() amount = 0;
+  
 }

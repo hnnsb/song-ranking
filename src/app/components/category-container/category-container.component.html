@@ -5,9 +5,10 @@
       <mat-card-title>
         <button (click)="toggleEdit()"
                 (submit)="toggleEdit()"
+                [ngClass]="isEditing ? 'btn-primary':'btn-outline-primary'"
                 class="btn rounded-5 mx-1"
-                type="submit"
-                [ngClass]="isEditing ? 'btn-primary':'btn-outline-primary'">
+                title="edit name"
+                type="submit">
           <i class="bi bi-pen"></i>
         </button>
         @if (isEditing) {
@@ -27,16 +28,21 @@
         }
       </mat-card-title>
       <div>
-        <button (click)="deleteCategory()" class="btn rounded-5 mx-3 btn-outline-danger align-content-center">
+        <button (click)="deleteCategory()"
+                class="btn rounded-5 mx-3 btn-outline-danger"
+                title="delete category">
           <i class="bi bi-trash"></i>
         </button>
-        <button (click)="saveToPlaylist()" class="btn rounded-5 mx-3 btn-outline-success">
+        <button (click)="saveToPlaylist()"
+                class="btn rounded-5 mx-3 btn-outline-success"
+                title="save category as playlist">
           <i class="bi bi-floppy"></i>
         </button>
         <button (click)="toggleCollapse()"
                 [attr.aria-expanded]="!isCollapsed"
                 [attr.data-bs-target]="'#card-content-'+index"
                 [disabled]="tracks.length==0"
+                title="Expand or collapse"
                 aria-controls="card-content"
                 class="btn rounded-5 btn-primary ms-3"
                 data-bs-toggle="collapse"
@@ -46,7 +52,9 @@
       </div>
     </mat-card-header>
 
-    <mat-card-content [attr.id]="'card-content-'+index" class="collapse" [ngClass]="{'show':!isCollapsed}">
+    <mat-card-content [attr.id]="'card-content-'+index"
+                      [ngClass]="{'show':!isCollapsed}"
+                      class="collapse">
       <mat-divider></mat-divider>
       @for (track of tracks; track track) {
         <app-track-entry cdkDrag class="mx-1" [track]="track"></app-track-entry>
