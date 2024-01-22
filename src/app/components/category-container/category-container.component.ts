@@ -32,6 +32,7 @@ export class CategoryContainerComponent {
   @Output() categoryNameChange = new EventEmitter<string>;
   @Output() propagateDropped = new EventEmitter<CdkDragDrop<Track[]>>;
   @Output() delete = new EventEmitter<Track[]>;
+  @Output() save = new EventEmitter<Track[]>;
 
   isEditing = false;
   isCollapsed = true;
@@ -55,7 +56,7 @@ export class CategoryContainerComponent {
   }
 
   saveToPlaylist() {
-
+    this.save.emit(this.tracks)
   }
 
   deleteCategory() {

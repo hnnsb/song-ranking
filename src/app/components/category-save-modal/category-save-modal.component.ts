@@ -1,19 +1,20 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, NgForm} from "@angular/forms";
 
 @Component({
-  selector: 'app-save-playlist-modal',
+  selector: 'modal-save-playlist',
   standalone: true,
   imports: [
     FormsModule
   ],
-  templateUrl: './save-playlist-modal.component.html',
-  styleUrl: './save-playlist-modal.component.css'
+  templateUrl: './category-save-modal.component.html',
+  styleUrl: './category-save-modal.component.css'
 })
-export class SavePlaylistModalComponent {
+export class CategorySaveModal {
   activeModal = inject(NgbActiveModal);
 
+  @Input() categoryName="";
   onSubmit(f: NgForm) {
     this.activeModal.close(f.value)
   }
